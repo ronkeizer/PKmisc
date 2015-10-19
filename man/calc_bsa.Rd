@@ -4,7 +4,7 @@
 \alias{calc_bsa}
 \title{Calculate BSA}
 \usage{
-calc_bsa(weight = NULL, height = NULL, method = "dubois_dubois")
+calc_bsa(weight = NULL, height = NULL, method = "dubois")
 }
 \arguments{
 \item{weight}{weight}

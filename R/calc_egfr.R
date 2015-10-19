@@ -9,15 +9,19 @@
 #' @param scr_unit, `mg/dL` or `micromol/L` (==`umol/L`)
 #' @param race `black` or `other`
 #' @param weight weight
+#' @param height height, only relevant when converting to/from BSA-relative unit
 #' @param bsa body surface area
 #' @param bsa_method BSA estimation method, see `bsa()` for details
+#' @param term `pre`-term or `full`-term infants (Schwartz equation only)
+#' @param ckd chronic kidney disease? (Schwartz equation only)
 #' @param relative report eGFR as per 1.73 m2. Requires BSA depending on `method` chosen.
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
 #' @export
 calc_egfr <- function (
   method = "malmo_lund_rev",
-  sex = "male", age = 50, scr = 1, race = "other",
-  weight = NULL, bsa = NULL, bsa_method = "dubois",
+  sex = "male", age = 50, scr = NULL, race = "other",
+  weight = NULL, height = NULL, bsa = NULL, bsa_method = "dubois",
+  term = "full", ckd = FALSE,
   scr_unit = "mg/dl",
   relative = FALSE,
   unit_out = "mL/min"
@@ -25,15 +29,20 @@ calc_egfr <- function (
     available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz")
     method <- tolower(method)
     sex <- tolower(sex)
-    if(relative) { # report eGFR per 1.73 m2. requires bsa or height as well
-      if(is.null(bsa)) {
-        if(weight) {
+    if(is.null(scr)) {
+      stop("Serum creatinine value required!")
+    }
+    if((relative && method %in% c("cockroft_gault", "malmo_lund_rev")) || (!relative && method %in% c("mdrd", "schwartz")) ) {
+      if(!(is.null(weight) && is.null(height))) { # report eGFR per 1.73 m2. requires bsa or height as well
+        if(is.null(bsa)) {
           bsa <- calc_bsa(weight, height, "dubois")
         }
       }
     }
+    unit_out <- tolower(unit_out)
     if(method %in% available_methods) {
       crcl <- c()
+      unit <- unit_out
       for (i in 1:length(scr)) {
         if(method == "mdrd") {
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
@@ -44,6 +53,10 @@ calc_egfr <- function (
           if (sex == "female") { f_sex <- 0.762 }
           if (race == "black") { f_race <- 1.210 }
           crcl[i] <- 186 * scr[i]^(-1.154) * f_sex * f_race * age^(-0.203)
+          if(!relative) {
+            crcl <- crcl * (bsa/1.73)
+            unit <- unit
+          }
         }
         if(method == "cockroft_gault") {
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
@@ -52,6 +65,10 @@ calc_egfr <- function (
           f_sex <- 1
           if (sex == "female") { f_sex <- 0.85 }
           crcl[i] <- f_sex * (140-age) / scr[i] * (weight/72)
+          if(relative) {
+            crcl <- crcl / (bsa/1.73)
+            unit <- paste0(unit_out, "/1.73m^2")
+          }
         }
         if(method == "malmo_lund_rev") {
           if(tolower(scr_unit[i]) == "mg/dl") {
@@ -71,18 +88,45 @@ calc_egfr <- function (
             }
           }
           crcl[i] <- exp(x - 0.0158*age + 0.438*log(age))
+          if(relative) {
+            crcl <- crcl / (bsa/1.73)
+            unit <- paste0(unit_out, "/1.73m^2")
+          }
         }
         if(method == "schwartz") {
-
+          k <- 0.55
+          if (age < 1) {
+            k <- 0.45
+            if(term == "pre") {
+              k <- 0.33
+            }
+          } else {
+            if(sex == "male") {
+              k <- 0.7
+            }
+            if(ckd) {
+              k <- 0.413
+            }
+          }
+          crcl <- (k * height) / scr
+          if(!relative) {
+            crcl <- crcl * (bsa/1.73)
+            message("eGFR from Schwartz commonly reported as relative to 1.73m^2 BSA. Consider using 'relative=TRUE' argument.")
+          } else {
+            unit <- paste0(unit_out, "/1.73m^2")
+          }
         }
-        if (unit_out == "L/hr") {
+        if (length(grep("L/hr", unit_out)) > 0) {
           crcl[i] <- crcl[i] * 60 / 1000
         }
-        if (unit_out == "mL/hr") {
+        if (length(grep("mL/hr", unit_out)) > 0) {
           crcl[i] <- crcl[i] * 60
         }
       }
-      crcl
+      return(list(
+        value = crcl,
+        unit = unit
+      ))
     } else {
       return(FALSE)
     }

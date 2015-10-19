@@ -9,7 +9,7 @@
 calc_bsa <- function (
   weight = NULL,
   height = NULL,
-  method = "dubois_dubois"
+  method = "dubois"
   ) {
     available_methods <- c("dubois", "mosteller", "haycock", "gehan_george", "boyd")
     method <- tolower(method)
