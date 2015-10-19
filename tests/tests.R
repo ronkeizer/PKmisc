@@ -19,9 +19,9 @@ assert("Cockroft-gault",
 assert("Cockroft-gault",
        round(calc_egfr(age = 40, weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
 assert("Malmo-Lund revised",
-       round(calc_egfr(age = 40, scr = 1, weight = 80, height = 180, method = "malmo_lund_rev", relative = TRUE)$value) == 73)
+       round(calc_egfr(age = 40, scr = 1, method = "malmo_lund_rev")$value) == 84)
 assert("Malmo-Lund revised",
-       round(calc_egfr(age = 40, scr = 1, method = "malmo_lund_rev", relative = FALSE)$value) == 84)
+       round(calc_egfr(age = 40, scr = 1, weight = 80, height = 180, method = "malmo_lund_rev", relative = FALSE)$value) == 97)
 assert("Schwartz",
        round(calc_egfr(age = 0.5, scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = TRUE)$value) == 45)
 assert("Schwartz",

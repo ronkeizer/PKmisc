@@ -14,7 +14,7 @@
 #' @param bsa_method BSA estimation method, see `bsa()` for details
 #' @param term `pre`-term or `full`-term infants (Schwartz equation only)
 #' @param ckd chronic kidney disease? (Schwartz equation only)
-#' @param relative report eGFR as per 1.73 m2. Requires BSA depending on `method` chosen.
+#' @param relative `TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
 #' @export
 calc_egfr <- function (
@@ -23,7 +23,7 @@ calc_egfr <- function (
   weight = NULL, height = NULL, bsa = NULL, bsa_method = "dubois",
   term = "full", ckd = FALSE,
   scr_unit = "mg/dl",
-  relative = FALSE,
+  relative = NULL,
   unit_out = "mL/min"
   ) {
     available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz")
@@ -32,7 +32,11 @@ calc_egfr <- function (
     if(is.null(scr)) {
       stop("Serum creatinine value required!")
     }
-    if((relative && method %in% c("cockroft_gault", "malmo_lund_rev")) || (!relative && method %in% c("mdrd", "schwartz")) ) {
+    if(is.null(relative)) {
+      relative <- TRUE # most equations report in /1.73m2
+      if(relative == "cockroft_gault") { relative <- FALSE }
+    }
+    if((relative && method %in% c("cockroft_gault")) || (!relative && method %in% c("mdrd", "schwartz", "malmo_lund_rev")) ) {
       if(!(is.null(weight) && is.null(height))) { # report eGFR per 1.73 m2. requires bsa or height as well
         if(is.null(bsa)) {
           bsa <- calc_bsa(weight, height, "dubois")
@@ -88,8 +92,8 @@ calc_egfr <- function (
             }
           }
           crcl[i] <- exp(x - 0.0158*age + 0.438*log(age))
-          if(relative) {
-            crcl <- crcl / (bsa/1.73)
+          if(!relative) {
+            crcl <- crcl * (bsa/1.73)
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
@@ -125,7 +129,8 @@ calc_egfr <- function (
       }
       return(list(
         value = crcl,
-        unit = unit
+        unit = unit,
+        bsa = bsa
       ))
     } else {
       return(FALSE)

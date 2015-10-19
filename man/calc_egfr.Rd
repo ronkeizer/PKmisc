@@ -7,7 +7,7 @@
 calc_egfr(method = "malmo_lund_rev", sex = "male", age = 50, scr = NULL,
   race = "other", weight = NULL, height = NULL, bsa = NULL,
   bsa_method = "dubois", term = "full", ckd = FALSE, scr_unit = "mg/dl",
-  relative = FALSE, unit_out = "mL/min")
+  relative = NULL, unit_out = "mL/min")
 }
 \arguments{
 \item{method}{eGFR estimation method, choose from `cockroft_gault`, `mdrd`, `malmo_lund_rev`, `schwartz`}
@@ -34,7 +34,7 @@ calc_egfr(method = "malmo_lund_rev", sex = "male", age = 50, scr = NULL,
 
 \item{scr_unit,}{`mg/dL` or `micromol/L` (==`umol/L`)}
 
-\item{relative}{report eGFR as per 1.73 m2. Requires BSA depending on `method` chosen.}
+\item{relative}{`TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.}
 
 \item{unit_out}{`ml/min` (default), `L/hr`, or `mL/hr`}
 }
