@@ -6,3 +6,4 @@ Miscellaneous PK equations and tools
 - Non-compartmental analysis
 - eGFR calculation using various equations
 - BSA calculation using various equations
+- Fat-free mass equation
