@@ -1,0 +1,11 @@
+Package: PKmisc
+Type: Package
+Title: Collection of simple PK equations
+Version: 0.9
+Date: 2015-10-19
+Author: Ron Keizer
+Maintainer: Ron Keizer <ronkeizer@gmail.com>
+Description: Equations for PK
+Depends: testit
+License: MIT
+LazyData: TRUE
