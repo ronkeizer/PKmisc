@@ -11,7 +11,7 @@ assert("NCA estimates are correct (css)", round(t1$css) == 1137)
 
 ## BSA
 assert("BSA",
-       round(calc_bsa(80, 180),2) == 2.00)
+       round(calc_bsa(80, 180)$value,2) == 2.00)
 
 ## eGFR
 assert("Cockroft-gault",
@@ -27,3 +27,22 @@ assert("Schwartz",
 assert("Schwartz",
        round(calc_egfr(age = 0.5, scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = FALSE)$value) == 6)
 
+## FFM
+assert("BMI=20 male 80kg",
+       round(calc_ffm (
+         weight = 80,
+         bmi = 20,
+         sex = "male"
+       )$value) == 67)
+assert("BMI=30 male 80kg",
+       round(calc_ffm (
+         weight = 80,
+         bmi = 30,
+         sex = "male"
+       )$value) == 56)
+assert("BMI=30 female 80kg",
+       round(calc_ffm (
+         weight = 80,
+         bmi = 30,
+         sex = "female"
+       )$value) == 46)

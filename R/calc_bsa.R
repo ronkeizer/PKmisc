@@ -35,8 +35,12 @@ calc_bsa <- function (
       if(method == "boyd") {
         bsa <- 0.0003207 * height^0.3 * (weight/1000)^(0.7285-(0.0188*log(weight/1000)))
       }
-      return(bsa)
+      return(list(
+        value = bsa,
+        unit = "m2"
+      ))
     } else {
       stop(paste0("Requested BSA estimation (", method,") method not found, please choose from: ", paste(methods_available, collapse=" ")))
     }
-}
+  }
+

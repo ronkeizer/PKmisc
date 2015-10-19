@@ -39,7 +39,7 @@ calc_egfr <- function (
     if((relative && method %in% c("cockroft_gault")) || (!relative && method %in% c("mdrd", "schwartz", "malmo_lund_rev")) ) {
       if(!(is.null(weight) && is.null(height))) { # report eGFR per 1.73 m2. requires bsa or height as well
         if(is.null(bsa)) {
-          bsa <- calc_bsa(weight, height, "dubois")
+          bsa <- calc_bsa(weight, height, "dubois")$value
         }
       }
     }
