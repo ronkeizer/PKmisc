@@ -56,3 +56,11 @@ assert("BMI=30 female 80kg",
          bmi = 30,
          sex = "female"
        )$value) == 46)
+
+## PK functions
+assert("PK 1cmt iv steady state",
+  round(tail(pk_1cmt_iv_ss(tau = 12, t_inf = 2), 1)$dv,3) == 0.954
+)
+assert("PK 1cmt iv steady state by summation",
+  round(tail(pk_1cmt_iv(tau = 12, t_inf = 2, t=seq(from=0, to=10*12, by=.2))$dv,1), 3) == 0.954
+)
