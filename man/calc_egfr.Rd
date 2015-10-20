@@ -4,9 +4,9 @@
 \alias{calc_egfr}
 \title{Calculate eGFR}
 \usage{
-calc_egfr(method = "malmo_lund_rev", sex = "male", age = 50, scr = NULL,
+calc_egfr(method = "malmo_lund_rev", sex = NULL, age = NULL, scr = NULL,
   race = "other", weight = NULL, height = NULL, bsa = NULL,
-  bsa_method = "dubois", term = "full", ckd = FALSE, scr_unit = "mg/dl",
+  term = "full", ckd = FALSE, bsa_method = "dubois", scr_unit = "mg/dl",
   relative = NULL, unit_out = "mL/min")
 }
 \arguments{
@@ -26,11 +26,11 @@ calc_egfr(method = "malmo_lund_rev", sex = "male", age = 50, scr = NULL,
 
 \item{bsa}{body surface area}
 
-\item{bsa_method}{BSA estimation method, see `bsa()` for details}
-
 \item{term}{`pre`-term or `full`-term infants (Schwartz equation only)}
 
 \item{ckd}{chronic kidney disease? (Schwartz equation only)}
+
+\item{bsa_method}{BSA estimation method, see `bsa()` for details}
 
 \item{scr_unit,}{`mg/dL` or `micromol/L` (==`umol/L`)}
 

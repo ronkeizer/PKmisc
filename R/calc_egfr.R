@@ -19,16 +19,25 @@
 #' @export
 calc_egfr <- function (
   method = "malmo_lund_rev",
-  sex = "male", age = 50, scr = NULL, race = "other",
-  weight = NULL, height = NULL, bsa = NULL, bsa_method = "dubois",
-  term = "full", ckd = FALSE,
+  sex = NULL,
+  age = NULL,
+  scr = NULL,
+  race = "other",
+  weight = NULL,
+  height = NULL,
+  bsa = NULL,
+  term = "full",
+  ckd = FALSE,
+  bsa_method = "dubois",
   scr_unit = "mg/dl",
   relative = NULL,
   unit_out = "mL/min"
   ) {
     available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz")
     method <- tolower(method)
-    sex <- tolower(sex)
+    if(!is.null(sex)) {
+      sex <- tolower(sex)
+    }
     if(is.null(scr)) {
       stop("Serum creatinine value required!")
     }
@@ -49,6 +58,9 @@ calc_egfr <- function (
       unit <- unit_out
       for (i in 1:length(scr)) {
         if(method == "mdrd") {
+          if(is.null(scr) || is.null(sex) || is.null(race) || is.null(age)) {
+            stop("MDRD equation requires: scr, sex, race, and age as input!")
+          }
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
             scr[i] <- scr[i] / 88.40
           }
@@ -63,6 +75,9 @@ calc_egfr <- function (
           }
         }
         if(method == "cockroft_gault") {
+          if(is.null(scr) || is.null(sex) || is.null(weight) || is.null(age)) {
+            stop("Cockroft-Gault equation requires: scr, sex, weight, and age as input!")
+          }
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
             scr[i] <- scr[i] / 88.40
           }
@@ -75,10 +90,13 @@ calc_egfr <- function (
           }
         }
         if(method == "malmo_lund_rev") {
+          if(is.null(scr) || is.null(sex) || is.null(age)) {
+            stop("Revised Malmo-Lund equation requires: scr, sex, and age as input!")
+          }
           if(tolower(scr_unit[i]) == "mg/dl") {
             scr[i] <- scr[i] * 88.40
           }
-          if(sex=="female") {
+          if(sex == "female") {
             if(scr[i] < 150) {
               x <- 2.50 + 0.0121 * log(150-scr[i])
             } else {
@@ -98,6 +116,9 @@ calc_egfr <- function (
           }
         }
         if(method == "schwartz") {
+          if(is.null(scr) || is.null(age) || is.null(sex) || is.null(height) || is.null(term)) {
+            stop("Schwartz equation requires: scr, sex, height, term, and age as input!")
+          }
           k <- 0.55
           if (age < 1) {
             k <- 0.45

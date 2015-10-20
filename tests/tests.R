@@ -14,18 +14,28 @@ assert("BSA",
        round(calc_bsa(80, 180)$value,2) == 2.00)
 
 ## eGFR
+err1 <- try(expr = { calc_egfr(scr = .5, weight = 4.5, method = "cockroft_gault") }, silent=TRUE)
+assert("Cockroft-gault error", class(err1[1]) == "character") # error message when no weight specified
 assert("Cockroft-gault",
-       round(calc_egfr(age = 40, weight = 80, scr = 1, method = "cockroft_gault", relative = FALSE)$value) == 111)
+       round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockroft_gault", relative = FALSE)$value) == 111)
 assert("Cockroft-gault",
-       round(calc_egfr(age = 40, weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
+       round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
+
+err2 <- try(expr = { calc_egfr(age = 40, weight = 80, scr = 1, method = "malmo_lund_rev", relative = FALSE) }, silent=TRUE)
+assert("Malmo-Lund error", class(err2[1]) == "character") # error message when no weight specified
 assert("Malmo-Lund revised",
-       round(calc_egfr(age = 40, scr = 1, method = "malmo_lund_rev")$value) == 84)
+       round(calc_egfr(age = 40, sex="male", scr = 1, method = "malmo_lund_rev")$value) == 84)
 assert("Malmo-Lund revised",
-       round(calc_egfr(age = 40, scr = 1, weight = 80, height = 180, method = "malmo_lund_rev", relative = FALSE)$value) == 97)
+       round(calc_egfr(age = 40, sex="male", scr = 1, weight = 80, height = 180, method = "malmo_lund_rev", relative = FALSE)$value) == 97)
+
+err3 <- try(expr = { calc_egfr(age = 0.5, scr = .5, weight = 4.5, method = "schwartz") }, silent=TRUE)
 assert("Schwartz",
-       round(calc_egfr(age = 0.5, scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = TRUE)$value) == 45)
+       round(calc_egfr(age = 0.5, sex="male", scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = TRUE)$value) == 45)
+assert("Schwartz error", class(err3[1]) == "character") # error message when no weight specified
 assert("Schwartz",
-       round(calc_egfr(age = 0.5, scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = FALSE)$value) == 6)
+       round(calc_egfr(age = 0.5, sex = "male", scr = .5,  height = 50, method = "schwartz")$value) == 45)
+assert("Schwartz",
+       round(calc_egfr(age = 0.5, sex = "male", scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = FALSE)$value) == 6)
 
 ## FFM
 assert("BMI=20 male 80kg",
