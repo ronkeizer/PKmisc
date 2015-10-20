@@ -17,7 +17,7 @@ assert("BSA",
 err1 <- try(expr = { calc_egfr(scr = .5, weight = 4.5, method = "cockroft_gault") }, silent=TRUE)
 assert("Cockroft-gault error", class(err1[1]) == "character") # error message when no weight specified
 assert("Cockroft-gault",
-       round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockroft_gault", relative = FALSE)$value) == 111)
+       round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockroft_gault")$value) == 111)
 assert("Cockroft-gault",
        round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
 
