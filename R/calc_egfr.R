@@ -74,6 +74,8 @@ calc_egfr <- function (
           if(!relative) {
             crcl <- crcl * (bsa/1.73)
             unit <- unit
+          } else {
+            unit <- paste0(unit_out, "/1.73m^2")
           }
         }
         if(method == "cockroft_gault") {
@@ -114,6 +116,7 @@ calc_egfr <- function (
           crcl[i] <- exp(x - 0.0158*age + 0.438*log(age))
           if(!relative) {
             crcl <- crcl * (bsa/1.73)
+          } else {
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
