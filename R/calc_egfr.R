@@ -55,6 +55,8 @@ calc_egfr <- function (
       }
     }
     unit_out <- tolower(unit_out)
+    scr_unit <- gsub("%2F", "/", scr_unit)
+    unit_out <- gsub("%2F", "/", unit_out)
     if(method %in% available_methods) {
       crcl <- c()
       unit <- unit_out
@@ -86,7 +88,9 @@ calc_egfr <- function (
             scr[i] <- scr[i] / 88.40
           }
           f_sex <- 1
-          if (sex == "female") { f_sex <- 0.85 }
+          if (sex == "female") {
+            f_sex <- 0.85
+          }
           crcl[i] <- f_sex * (140-age) / scr[i] * (weight/72)
           if(relative) {
             crcl <- crcl / (bsa/1.73)
@@ -102,9 +106,9 @@ calc_egfr <- function (
           }
           if(sex == "female") {
             if(scr[i] < 150) {
-              x <- 2.50 + 0.0121 * log(150-scr[i])
+              x <- 2.50 + 0.0121 * (150-scr[i])
             } else {
-              x <- 2.50 - 0.926 * (scr[i]/150)
+              x <- 2.50 - 0.926 * log(scr[i]/150)
             }
           } else { # male
             if(scr[i] < 180) {
