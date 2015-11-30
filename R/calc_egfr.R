@@ -62,7 +62,7 @@ calc_egfr <- function (
       unit <- unit_out
       for (i in 1:length(scr)) {
         if(method == "mdrd") {
-          if(is.null(scr) || is.null(sex) || is.null(race) || is.null(age)) {
+          if(is.null(scr[i]) || is.null(sex) || is.null(race) || is.null(age)) {
             stop("MDRD equation requires: scr, sex, race, and age as input!")
           }
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
@@ -74,14 +74,14 @@ calc_egfr <- function (
           if (race == "black") { f_race <- 1.210 }
           crcl[i] <- 186 * scr[i]^(-1.154) * f_sex * f_race * age^(-0.203)
           if(!relative) {
-            crcl <- crcl * (bsa/1.73)
+            crcl[i] <- crcl[i] * (bsa/1.73)
             unit <- unit
           } else {
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
         if(method == "cockroft_gault") {
-          if(is.null(scr) || is.null(sex) || is.null(weight) || is.null(age)) {
+          if(is.null(scr[i]) || is.null(sex) || is.null(weight) || is.null(age)) {
             stop("Cockroft-Gault equation requires: scr, sex, weight, and age as input!")
           }
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
@@ -93,7 +93,7 @@ calc_egfr <- function (
           }
           crcl[i] <- f_sex * (140-age) / scr[i] * (weight/72)
           if(relative) {
-            crcl <- crcl / (bsa/1.73)
+            crcl[i] <- crcl[i] / (bsa/1.73)
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
@@ -125,7 +125,7 @@ calc_egfr <- function (
           }
         }
         if(method == "schwartz") {
-          if(is.null(scr) || is.null(age) || is.null(sex) || is.null(height) || is.null(term)) {
+          if(is.null(scr[i]) || is.null(age) || is.null(sex) || is.null(height) || is.null(term)) {
             stop("Schwartz equation requires: scr, sex, height, term, and age as input!")
           }
           k <- 0.55
@@ -142,9 +142,9 @@ calc_egfr <- function (
               k <- 0.413
             }
           }
-          crcl <- (k * height) / scr
+          crcl[i] <- (k * height) / scr
           if(!relative) {
-            crcl <- crcl * (bsa/1.73)
+            crcl[i] <- crcl[i] * (bsa/1.73)
             message("eGFR from Schwartz commonly reported as relative to 1.73m^2 BSA. Consider using 'relative=TRUE' argument.")
           } else {
             unit <- paste0(unit_out, "/1.73m^2")
