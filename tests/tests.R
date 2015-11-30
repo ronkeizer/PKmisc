@@ -37,6 +37,17 @@ assert("Schwartz",
 assert("Schwartz",
        round(calc_egfr(age = 0.5, sex = "male", scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = FALSE)$value) == 6)
 
+l <- calc_egfr(
+  method = "malmo_lund_rev",
+  weight = 45,
+  age = 62,
+  height = 156,
+  scr = c(63, 54, 60, 52),
+  scr_unit = rep("umol/l", 4),
+  sex = "female",
+  relative = FALSE)
+assert("multiple calc egfr malmo-lund rev", round(l$value) == c(65,73, 67,74))
+
 ## FFM
 assert("BMI=20 male 80kg",
        round(calc_ffm (

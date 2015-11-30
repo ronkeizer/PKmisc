@@ -18,7 +18,7 @@
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
 #' @export
 calc_egfr <- function (
-  method = "malmo_lund_rev",
+  method = "cockroft_gault",
   sex = NULL,
   age = NULL,
   scr = NULL,
@@ -97,9 +97,9 @@ calc_egfr <- function (
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
-        if(method == "malmo_lund_rev") {
+        if(method == "malmo_lund_rev" || method == "lund_malmo_rev") {
           if(is.null(scr) || is.null(sex) || is.null(age)) {
-            stop("Revised Malmo-Lund equation requires: scr, sex, and age as input!")
+            stop("Revised Lund-Malmo equation requires: scr, sex, and age as input!")
           }
           if(tolower(scr_unit[i]) == "mg/dl") {
             scr[i] <- scr[i] * 88.40
@@ -119,7 +119,7 @@ calc_egfr <- function (
           }
           crcl[i] <- exp(x - 0.0158*age + 0.438*log(age))
           if(!relative) {
-            crcl <- crcl * (bsa/1.73)
+            crcl[i] <- crcl[i] * (bsa/1.73)
           } else {
             unit <- paste0(unit_out, "/1.73m^2")
           }
