@@ -51,6 +51,8 @@ nca <- function (
       if(tau > tail(data$time,1)) {
         c_at_tau <- tail(trap$dv,1) * exp(-out$kel * (tau-tail(data$time,1)))
         out$auc_tau <- out$auc_inf - c_at_tau/out$kel
+      } else {
+        out$auc_tau <- out$auc_t
       }
       out$css <- out$auc_t / tau
     }
