@@ -35,6 +35,9 @@ calc_egfr <- function (
   ) {
     available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz")
     method <- tolower(method)
+    if(!method %in% available_methods) {
+      stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
+    }
     if(!is.null(sex)) {
       sex <- tolower(sex)
     }
@@ -57,6 +60,9 @@ calc_egfr <- function (
     unit_out <- tolower(unit_out)
     scr_unit <- gsub("%2F", "/", scr_unit)
     unit_out <- gsub("%2F", "/", unit_out)
+    if(length(scr_unit) == 1 && length(scr) > 1) {
+      scr_unit <- rep(scr_unit, length(scr))
+    }
     if(method %in% available_methods) {
       crcl <- c()
       unit <- unit_out
@@ -150,10 +156,10 @@ calc_egfr <- function (
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
-        if (length(grep("L/hr", unit_out)) > 0) {
+        if (length(grep("l/hr", tolower(unit_out))) > 0) {
           crcl[i] <- crcl[i] * 60 / 1000
         }
-        if (length(grep("mL/hr", unit_out)) > 0) {
+        if (length(grep("ml/hr", tolower(unit_out))) > 0) {
           crcl[i] <- crcl[i] * 60
         }
       }
