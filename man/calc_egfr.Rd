@@ -4,7 +4,7 @@
 \alias{calc_egfr}
 \title{Calculate eGFR}
 \usage{
-calc_egfr(method = "malmo_lund_rev", sex = NULL, age = NULL, scr = NULL,
+calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
   race = "other", weight = NULL, height = NULL, bsa = NULL,
   term = "full", ckd = FALSE, bsa_method = "dubois", scr_unit = "mg/dl",
   relative = NULL, unit_out = "mL/min")
