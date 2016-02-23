@@ -7,6 +7,7 @@
 #' @param age age
 #' @param scr serum creatinine (mg/dL)
 #' @param scr_unit, `mg/dL` or `micromol/L` (==`umol/L`)
+#' @param scr_assay, `jaffe` or `enzymatic` or `idms`
 #' @param race `black` or `other`
 #' @param weight weight
 #' @param height height, only relevant when converting to/from BSA-relative unit
@@ -30,6 +31,7 @@ calc_egfr <- function (
   ckd = FALSE,
   bsa_method = "dubois",
   scr_unit = "mg/dl",
+  scr_assay = "jaffe",
   relative = NULL,
   unit_out = "mL/min"
   ) {

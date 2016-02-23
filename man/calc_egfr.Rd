@@ -7,7 +7,7 @@
 calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
   race = "other", weight = NULL, height = NULL, bsa = NULL,
   term = "full", ckd = FALSE, bsa_method = "dubois", scr_unit = "mg/dl",
-  relative = NULL, unit_out = "mL/min")
+  scr_assay = "jaffe", relative = NULL, unit_out = "mL/min")
 }
 \arguments{
 \item{method}{eGFR estimation method, choose from `cockroft_gault`, `mdrd`, `malmo_lund_rev`, `schwartz`}
@@ -33,6 +33,8 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
 \item{bsa_method}{BSA estimation method, see `bsa()` for details}
 
 \item{scr_unit,}{`mg/dL` or `micromol/L` (==`umol/L`)}
+
+\item{scr_assay,}{`jaffe` or `enzymatic` or `idms`}
 
 \item{relative}{`TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.}
 
