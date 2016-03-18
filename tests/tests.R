@@ -29,13 +29,13 @@ assert("Malmo-Lund revised",
        round(calc_egfr(age = 40, sex="male", scr = 1, weight = 80, height = 180, method = "malmo_lund_rev", relative = FALSE)$value) == 97)
 
 err3 <- try(expr = { calc_egfr(age = 0.5, scr = .5, weight = 4.5, method = "schwartz") }, silent=TRUE)
-assert("Schwartz",
-       round(calc_egfr(age = 0.5, sex="male", scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = TRUE)$value) == 45)
+assert("Schwartz revised",
+       calc_egfr(age = 0.5, sex="male", scr = .5, weight = 4.5, height = 50, method = "schwartz_revised", scr_assay="idms", relative = TRUE)$value == 41.3)
 assert("Schwartz error", class(err3[1]) == "character") # error message when no weight specified
+assert("Schwartz revised",
+       calc_egfr(age = 0.5, sex = "male", scr = .5,  height = 50, method = "schwartz_revised")$value == 41.3)
 assert("Schwartz",
-       round(calc_egfr(age = 0.5, sex = "male", scr = .5,  height = 50, method = "schwartz")$value) == 45)
-assert("Schwartz",
-       round(calc_egfr(age = 0.5, sex = "male", scr = .5, weight = 4.5, height = 50, method = "schwartz", relative = FALSE)$value) == 6)
+       calc_egfr(age = 0.5, sex = "male", scr = .5, weight = 4.5, height = 50, method = "schwartz")$value == 33)
 
 l <- calc_egfr(
   method = "malmo_lund_rev",

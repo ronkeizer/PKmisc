@@ -13,7 +13,7 @@
 #' @param height height, only relevant when converting to/from BSA-relative unit
 #' @param bsa body surface area
 #' @param bsa_method BSA estimation method, see `bsa()` for details
-#' @param ckd chronic kidney disease? (Schwartz equation only)
+#' @param ckd chronic kidney disease? (Schwartz equations only)
 #' @param relative `TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
 #' @export
@@ -29,18 +29,29 @@ calc_egfr <- function (
   preterm = FALSE,
   ckd = FALSE,
   bsa_method = "dubois",
-  scr_unit = "mg/dl",
-  scr_assay = "jaffe",
+  scr_unit = NULL,
+  scr_assay = NULL,
   relative = NULL,
   unit_out = "mL/min"
   ) {
-    available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz")
+    available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz", "schwartz_revised")
     method <- tolower(method)
     if(length(grep("cockroft", method)) > 0) {
       method <- "cockroft_gault"
     }
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
+    }
+    if(is.null(scr_assay)) {
+      scr_assay <- "jaffe"
+      if(method == "schwartz_revised") {
+        scr_assay <- "idms"
+      }
+      message("Creatinine assay not specified, assuming ", scr_assay, ".")
+    }
+    if(is.null(scr_unit)) {
+      message("Creatinine unit not specified, assuming mg/dL.")
+      scr_unit <- "mg/dl"
     }
     if(!is.nil(sex)) {
       sex <- tolower(sex)
@@ -144,26 +155,30 @@ calc_egfr <- function (
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
-        if(method == "schwartz") {
+        if(method == "schwartz" || method == "schwartz_revised") {
           if(is.nil(scr[i]) || is.nil(age) || is.nil(sex) || is.nil(height) || is.nil(preterm)) {
             stop("Schwartz equation requires: scr, sex, height, preterm, and age as input!")
           }
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
             scr[i] <- scr[i] / 88.40
           }
-          scr[i] <- convert_creat_assay(scr[i], from = scr_assay, to="idms")
-          k <- 0.55
-          if (age < 1) {
-            k <- 0.45
-            if(age < (40/52)) {
-              k <- 0.33
-            }
+          if(method == "schwartz_revised") {
+            scr[i] <- convert_creat_assay(scr[i], from = scr_assay, to = "idms")
+            k <- 0.413
           } else {
-            if(sex == "male") {
-              k <- 0.7
-            }
-            if(ckd) {
-              k <- 0.413
+            k <- 0.55
+            if (age < 1) {
+              k <- 0.45
+              if(age < (40/52)) {
+                k <- 0.33
+              }
+            } else {
+              if(sex == "male") {
+                k <- 0.7
+              }
+              if(ckd) {
+                k <- 0.413
+              }
             }
           }
           crcl[i] <- (k * height) / scr
