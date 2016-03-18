@@ -37,6 +37,9 @@ calc_egfr <- function (
   ) {
     available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz")
     method <- tolower(method)
+    if(length(grep("cockroft", method)) > 0) {
+      method <- "cockroft_gault"
+    }
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
     }
@@ -145,6 +148,9 @@ calc_egfr <- function (
         if(method == "schwartz") {
           if(is.nil(scr[i]) || is.nil(age) || is.nil(sex) || is.nil(height) || is.nil(term)) {
             stop("Schwartz equation requires: scr, sex, height, term, and age as input!")
+          }
+          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+            scr[i] <- scr[i] / 88.40
           }
           k <- 0.55
           if (age < 1) {
