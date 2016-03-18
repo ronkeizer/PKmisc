@@ -13,7 +13,6 @@
 #' @param height height, only relevant when converting to/from BSA-relative unit
 #' @param bsa body surface area
 #' @param bsa_method BSA estimation method, see `bsa()` for details
-#' @param term `pre`-term or `full`-term infants (Schwartz equation only)
 #' @param ckd chronic kidney disease? (Schwartz equation only)
 #' @param relative `TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
@@ -27,7 +26,7 @@ calc_egfr <- function (
   weight = NULL,
   height = NULL,
   bsa = NULL,
-  term = "full",
+  preterm = FALSE,
   ckd = FALSE,
   bsa_method = "dubois",
   scr_unit = "mg/dl",
@@ -146,16 +145,17 @@ calc_egfr <- function (
           }
         }
         if(method == "schwartz") {
-          if(is.nil(scr[i]) || is.nil(age) || is.nil(sex) || is.nil(height) || is.nil(term)) {
-            stop("Schwartz equation requires: scr, sex, height, term, and age as input!")
+          if(is.nil(scr[i]) || is.nil(age) || is.nil(sex) || is.nil(height) || is.nil(preterm)) {
+            stop("Schwartz equation requires: scr, sex, height, preterm, and age as input!")
           }
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
             scr[i] <- scr[i] / 88.40
           }
+          scr[i] <- convert_creat_assay(scr[i], from = scr_assay, to="idms")
           k <- 0.55
           if (age < 1) {
             k <- 0.45
-            if(term == "pre") {
+            if(age < (40/52)) {
               k <- 0.33
             }
           } else {

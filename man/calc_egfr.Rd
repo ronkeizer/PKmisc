@@ -6,8 +6,9 @@
 \usage{
 calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
   race = "other", weight = NULL, height = NULL, bsa = NULL,
-  term = "full", ckd = FALSE, bsa_method = "dubois", scr_unit = "mg/dl",
-  scr_assay = "jaffe", relative = NULL, unit_out = "mL/min")
+  preterm = FALSE, ckd = FALSE, bsa_method = "dubois",
+  scr_unit = "mg/dl", scr_assay = "jaffe", relative = NULL,
+  unit_out = "mL/min")
 }
 \arguments{
 \item{method}{eGFR estimation method, choose from `cockroft_gault`, `mdrd`, `malmo_lund_rev`, `schwartz`}
@@ -25,8 +26,6 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
 \item{height}{height, only relevant when converting to/from BSA-relative unit}
 
 \item{bsa}{body surface area}
-
-\item{term}{`pre`-term or `full`-term infants (Schwartz equation only)}
 
 \item{ckd}{chronic kidney disease? (Schwartz equation only)}
 
