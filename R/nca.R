@@ -13,7 +13,12 @@ nca <- function (
     method = "log_linear",
     dv_min = 1e-3
   ) {
-  if(!is.null(data)) {
+  if(is.null(data)) {
+    stop("No data supplied to NCA function")
+  } else {
+    if(is.null(data$dv) || is.null(data$time)) {
+      stop("No time ('time') or dependent variable ('dv') data in supplied dataset")
+    }
     mean_step <- function(x) { (x[1:(length(x)-1)] + x[2:length(x)]) / 2 }
     if (!is.null(dv_min)) { # protect against log <= 0
       if(sum(data$dv < dv_min) > 0) {
@@ -31,11 +36,11 @@ nca <- function (
     out$cl <- (out$kel) * out$v
 
     ## get the auc
-    tmax_id <- match(max(data$dv), data$dv)
+    tmax_id <- match(max(data$dv), data$dv)[1]
     out$tmax <- out$time[tmax_id]
     pre <- data[1:tmax_id,]
     trap <- data[tmax_id:length(data[,1]),]
-    if (length(pre[,1])>0) {
+    if (length(pre[,1]) > 0) {
       auc_pre <- sum(diff(pre$time) * (mean_step(pre$dv) ) )
     } else {
       auc_pre <- 0
