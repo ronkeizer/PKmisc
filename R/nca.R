@@ -4,6 +4,7 @@
 #' @param dose dose amount
 #' @param tau dosing frequency
 #' @param method `log_linear` or `linear`
+#' @param scale list with scaling for auc and concentration (`conc`)
 #' @param dv_min minimum concentrations, lower observations will be set to this value
 #' @export
 nca <- function (
@@ -11,6 +12,7 @@ nca <- function (
     dose = 100,
     tau = 6,
     method = "log_linear",
+    scale = list(auc = 1, conc = 1),
     dv_min = 1e-3
   ) {
   if(is.null(data)) {
@@ -51,15 +53,16 @@ nca <- function (
       } else {
         auc_post <- sum(diff(trap$time) * (mean_step(trap$dv)))
       }
-      out$auc_t <- auc_pre + auc_post
-      out$auc_inf <- out$auc_t + tail(trap$dv,1)/out$kel
+      auc_t <- (auc_pre + auc_post)
+      out$auc_t <- auc_t * scale$auc
+      out$auc_inf <- out$auc_t + (tail(trap$dv,1)/out$kel) * scale$auc
       if(tau > tail(data$time,1)) {
         c_at_tau <- tail(trap$dv,1) * exp(-out$kel * (tau-tail(data$time,1)))
-        out$auc_tau <- out$auc_inf - c_at_tau/out$kel
+        out$auc_tau <- out$auc_inf - (c_at_tau/out$kel) * scale$auc
       } else {
         out$auc_tau <- out$auc_t
       }
-      out$css <- out$auc_t / tau
+      out$css <- (auc_t / tau) * scale$conc
     }
     return(out)
   }
