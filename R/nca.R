@@ -54,15 +54,18 @@ nca <- function (
         auc_post <- sum(diff(trap$time) * (mean_step(trap$dv)))
       }
       auc_t <- (auc_pre + auc_post)
-      out$auc_t <- auc_t * scale$auc
-      out$auc_inf <- out$auc_t + (tail(trap$dv,1)/out$kel) * scale$auc
+      auc_inf <- auc_t + (tail(trap$dv,1)/out$kel)
       if(tau > tail(data$time,1)) {
         c_at_tau <- tail(trap$dv,1) * exp(-out$kel * (tau-tail(data$time,1)))
-        out$auc_tau <- out$auc_inf - (c_at_tau/out$kel) * scale$auc
+        auc_tau <- auc_inf - (c_at_tau/out$kel)
       } else {
-        out$auc_tau <- out$auc_t
+        auc_tau <- auc_t
       }
-      out$css <- (auc_t / tau) * scale$conc
+      out$auc_t <- auc_t * scale$auc
+      out$auc_inf <- auc_inf * scale$auc
+      out$auc_tau <- auc_tau * scale$auc
+      out$css <- (auc_t / diff(range(data$time))) * scale$conc  # css,t
+      out$css_tau <- (auc_tau / tau) * scale$conc
     }
     return(out)
   }
