@@ -7,7 +7,8 @@ data <- data.frame(cbind(time = c(0, 1, 2, 4, 6, 8),
 t1 <- nca(data)
 assert("NCA estimates are correct (AUCinf)", round(t1$auc_inf) == 9164)
 assert("NCA estimates are correct (AUCt)", round(t1$auc_t) == 6824)
-assert("NCA estimates are correct (css)", round(t1$css) == 1137)
+assert("NCA estimates are correct (css_t)", round(t1$css) == 853)
+assert("NCA estimates are correct (css_tau)", round(t1$css_tau) == 1137)
 
 ## BSA
 assert("BSA",

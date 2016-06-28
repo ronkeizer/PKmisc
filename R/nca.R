@@ -30,11 +30,11 @@ nca <- function (
     data$dv_log <- log(data$dv)
     last_n <- 3
     if (length(data[,1]) > 4) { last_n = 4 }
-    fit <- lm (dv_log ~ time, tail(data, last_n))
+    fit <- stats::lm(dv_log ~ time, utils::tail(data, last_n))
     out <- list()
-    out$kel <- -coef(fit)[["time"]]
+    out$kel <- -stats::coef(fit)[["time"]]
     out$t_12 <- log(2) / out$kel
-    out$v <- exp(coef(fit)[[1]] - data$dv_log[1]) / dose
+    out$v <- exp(stats::coef(fit)[[1]] - data$dv_log[1]) / dose
     out$cl <- (out$kel) * out$v
 
     ## get the auc
@@ -54,9 +54,9 @@ nca <- function (
         auc_post <- sum(diff(trap$time) * (mean_step(trap$dv)))
       }
       auc_t <- (auc_pre + auc_post)
-      auc_inf <- auc_t + (tail(trap$dv,1)/out$kel)
-      if(tau > tail(data$time,1)) {
-        c_at_tau <- tail(trap$dv,1) * exp(-out$kel * (tau-tail(data$time,1)))
+      auc_inf <- auc_t + (utils::tail(trap$dv,1)/out$kel)
+      if(tau > utils::tail(data$time,1)) {
+        c_at_tau <- utils::tail(trap$dv,1) * exp(-out$kel * (tau-utils::tail(data$time,1)))
         auc_tau <- auc_inf - (c_at_tau/out$kel)
       } else {
         auc_tau <- auc_t

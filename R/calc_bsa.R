@@ -40,7 +40,7 @@ calc_bsa <- function (
         unit = "m2"
       ))
     } else {
-      stop(paste0("Requested BSA estimation (", method,") method not found, please choose from: ", paste(methods_available, collapse=" ")))
+      stop(paste0("Requested BSA estimation (", method,") method not found, please choose from: ", paste(available_methods, collapse=" ")))
     }
   }
 

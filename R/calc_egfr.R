@@ -16,12 +16,15 @@
 #' @param ckd chronic kidney disease? (Schwartz equations only)
 #' @param relative `TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
+#' @param preterm is patient preterm?
 #' @export
 calc_egfr <- function (
   method = "cockroft_gault",
   sex = NULL,
   age = NULL,
   scr = NULL,
+  scr_unit = NULL,
+  scr_assay = NULL,
   race = "other",
   weight = NULL,
   height = NULL,
@@ -29,8 +32,6 @@ calc_egfr <- function (
   preterm = FALSE,
   ckd = FALSE,
   bsa_method = "dubois",
-  scr_unit = NULL,
-  scr_assay = NULL,
   relative = NULL,
   unit_out = "mL/min"
   ) {
