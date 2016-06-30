@@ -3,10 +3,10 @@
 # PKmisc
 Miscellaneous equations and tools for clinical pharmacokinetics
 
-## Functions
+## Tools
 - `nca()`: Non-compartmental analysis
 
-## Anthropomorhpic equations
+## Anthropomorphic equations
 - `calc_bsa()`: BSA calculation using various equations
 - `calc_ffm()`: Fat-free mass
 - `calc_bmi()`: Body mass index
