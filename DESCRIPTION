@@ -7,7 +7,8 @@ Author: Ron Keizer
 Maintainer: Ron Keizer <ronkeizer@gmail.com>
 Description: Equations for pharmacokinetics.
 Imports:
-    testit
+    testit,
+    curl
 License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 5.0.1

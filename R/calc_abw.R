@@ -4,8 +4,9 @@
 #'
 #' @param weight actual body weight in kg
 #' @param ibw ideal body weight in kg
+#' @param verbose show output?
 #' @param ... parameters passed to ibw function (if `ibw` not specified)
-#'
+#' @export
 calc_abw <- function(weight=NULL, ibw=NULL, verbose = TRUE, ...) {
   if(is.null(weight)) {
     stop("Weight needs to be specified!")

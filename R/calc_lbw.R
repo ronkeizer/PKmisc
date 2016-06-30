@@ -4,6 +4,7 @@
 #' @param weight weight in kg
 #' @param height height in cm
 #' @param sex either male or female
+#' @export
 calc_lbw <- function(weight=NULL, height=NULL, sex="male") {
   if(is.null(weight) || is.null(height) || is.null(sex)) {
     stop("Weight, height, and sex need to be specified!")

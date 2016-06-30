@@ -11,6 +11,8 @@ calc_abw(weight = NULL, ibw = NULL, verbose = TRUE, ...)
 
 \item{ibw}{ideal body weight in kg}
 
+\item{verbose}{show output?}
+
 \item{...}{parameters passed to ibw function (if `ibw` not specified)}
 }
 \description{
