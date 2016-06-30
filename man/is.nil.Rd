@@ -2,7 +2,7 @@
 % Please edit documentation in R/misc.R
 \name{is.nil}
 \alias{is.nil}
-\title{Miscellaneous functions}
+\title{Check if values in vector are empty}
 \usage{
 is.nil(x)
 }
@@ -10,6 +10,6 @@ is.nil(x)
 \item{x}{vector}
 }
 \description{
-Miscellaneous functions
+Check if values in vector are empty
 }
 

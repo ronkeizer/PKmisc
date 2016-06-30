@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_bsa.R
 \name{calc_bsa}
 \alias{calc_bsa}
-\title{Calculate BSA}
+\title{Calculate body surface area}
 \usage{
 calc_bsa(weight = NULL, height = NULL, method = "dubois")
 }

@@ -1,4 +1,4 @@
-#' Calculate BSA
+#' Calculate fat-free mass
 #'
 #' Get an estimate of body-surface area based on weight and height.
 #'

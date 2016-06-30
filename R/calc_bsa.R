@@ -1,4 +1,4 @@
-#' Calculate BSA
+#' Calculate body surface area
 #'
 #' Get an estimate of body-surface area based on weight and height
 #'

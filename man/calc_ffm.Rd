@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_ffm.R
 \name{calc_ffm}
 \alias{calc_ffm}
-\title{Calculate BSA}
+\title{Calculate fat-free mass}
 \usage{
 calc_ffm(weight = NULL, bmi = NULL, sex = NULL)
 }
