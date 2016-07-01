@@ -21,8 +21,8 @@ pk_1cmt_inf_ss <- function(
   tmp <- c()
   t_dos <- t %% tau
   dat <- data.frame(cbind(t = t, dv = 0))
-  dat$dv[t_dos < t_inf]  <- (dose / (CL * t_inf)) * ((1-exp(-k * t_dos[t_dos < t_inf]) + (exp(-k*tau) * (1-exp(-k*t_inf)) * exp(-k*(t_dos[t_dos < t_inf] - t_inf)) / (1-exp(-k*tau)))))
-  dat$dv[t_dos >= t_inf] <- (dose / (CL * t_inf)) * (1-exp(-k*t_inf)) * exp(-k*(t_dos[t_dos >= t_inf] - t_inf)) / (1-exp(-k*tau))
+  dat$dv[t_dos <= t_inf] <- (dose / (CL * t_inf)) * ((1-exp(-k * t_dos[t_dos <= t_inf]) + (exp(-k*tau) * (1-exp(-k*t_inf)) * exp(-k*(t_dos[t_dos <= t_inf] - t_inf)) / (1-exp(-k*tau)))))
+  dat$dv[t_dos > t_inf]  <- (dose / (CL * t_inf)) * (1-exp(-k*t_inf)) * exp(-k*(t_dos[t_dos > t_inf] - t_inf)) / (1-exp(-k*tau))
   if(!is.null(ruv)) {
     dat$dv <- add_ruv (dat$dv, ruv)
   }
