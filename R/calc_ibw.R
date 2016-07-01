@@ -2,10 +2,10 @@
 #'
 #' Get an estimate of ideal body weight. This function allows several commonly used equations
 #'
-#' @param age age in years
-#' @param weight weight in kg
-#' @param height height in cm
-#' @param sex either `male` or `female`
+#' @param age age in years, can be vector
+#' @param weight weight in kg, can be vector
+#' @param height height in cm, can be vector
+#' @param sex either `male` or `female`, can be vector
 #' @param method_children method to use for children >1 and <18 years. Choose from `standard`, `mclaren` (McLaren DS, Read WWC. Lancet. 1972;2:146-148.), `moore` (Moore DJ et al. Nutr Res. 1985;5:797-799), `bmi` (), `ada` (American Dietary Association)
 #' @param method_adults method to use for >=18 years. Choose from `devine` (default, Devine BJ. Drug Intell Clin Pharm. 1974;8:650-655).
 #' @param digits number of decimals (can be NULL to for no rounding)
@@ -56,51 +56,58 @@ calc_ibw <- function (
   if(is.null(age)) {
     stop("Age not specified!")
   }
+  if(length(weight > 1)) {
+    if(length(height) != length(weight)) {
+      message("Height and weight do not have same vector lenght, using only first height.")
+      height <- rep(height[1], length(weight))
+    }
+    if(length(age) != length(weight)) {
+      message("Age and weight do not have same vector lenght, using only first age.")
+      age <- rep(age[1], length(weight))
+    }
+    if(length(sex) != length(weight)) {
+      message("Sex and weight do not have same vector lenght, using only first sex.")
+      sex <- rep(sex[1], length(weight))
+    }
+  }
 
   ibw <- NULL
 
   ## babies
-  if(age < 1) {
-    message("Note: IBW is commonly not used for children < 1 year, most often actual body weight is used for this population.")
-    ibw <- weight
+  ibw <- rep(0, length(weight))
+  if(any(age < 1)) {
+    message("Note: using actual body weight as IBW for children < 1yr.")
+    ibw[age < 1] <- weight[age < 1]
   }
 
   ## children
-  if(age >= 1 && age < 18) {
+  ht <- cm2inch(height)
+  if(any(age >= 1 & age < 18)) {
     if(method_children == "standard") {
-      if(is.null(height) || is.null(age) || is.null(sex)) {
-        stop("Height, age and sex are required!")
+      if(any(is.null(height) || is.null(age) || is.null(sex))) {
+        ibw[age >= 1 & age < 18 & (is.null(height) || is.null(age) || is.null(sex))] <- NA
+        message("Height, age and sex are required!")
       }
-      if(cm2inch(height) < 5*12) {
-        ibw <- (height^2 * 1.65)/1000
-      } else {
-        if(tolower(sex) == "male") {
-          ibw <- 39 + 2.27 * (cm2inch(height)-(5*12))
-        } else {
-          ibw <- 42.2 + 2.27 * (cm2inch(height)-(5*12))
-        }
-      }
+      ibw[age >= 1 & age < 18 & ht < 5*12] <- (height[age >= 1 & age < 18 & ht < 5*12]^2 * 1.65)/1000
+      ibw[age >= 1 & age < 18 & ht >= 5*12] <-
+        (39   + 2.27 * (ht[age >= 1 & age < 18 & ht >= 5*12]-(5*12))) * (sex[age >= 1 & age < 18 & ht >= 5*12]=="male") +
+        (42.2 + 2.27 * (ht[age >= 1 & age < 18 & ht >= 5*12]-(5*12))) * (sex[age >= 1 & age < 18 & ht >= 5*12]=="female")
     }
   }
 
   ## adults
-  if(age > 18) {
+  if(any(age >= 18)) {
     if(method_adults == "devine") {
-      if(is.null(height) || is.null(sex)) {
-        stop("Height and sex are required to calculate!")
+      if(any(is.null(height) || is.null(sex))) {
+        ibw[age >= 18 & (is.null(height) || is.null(sex))] <- NA
+        message("Height and sex are required to calculate!")
       }
-      if(sex == "male") {
-        ibw <- 50 + (2.3 * (cm2inch(height)-(5*12)))
-      }
-      if(sex == "female") {
-        ibw <- 45.5 + (2.3 * (cm2inch(height)-(5*12)))
-      }
+      ibw[age >= 18] <-
+        (50 + (2.3 * (ht[age >= 18]-(5*12)))) * (sex[age >= 18] == "male") +
+        (45.5 + (2.3 * (ht[age >= 18]-(5*12)))) * (sex[age >= 18] == "female")
     }
   }
 
-  if(is.null(ibw)) {
-    stop("For some reason, IBW could not be calculated. Check your inputs.")
-  }
   if(!is.null(digits)) {
     ibw <- round(ibw, digits=digits)
   }
