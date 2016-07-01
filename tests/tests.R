@@ -3,7 +3,7 @@ library(testit)
 
 ## NCA
 data <- data.frame(cbind(time = c(0, 1, 2, 4, 6, 8),
-                         dv = c(300, 1400, 1150, 900, 700, 400)))
+                         dv   = c(300, 1400, 1150, 900, 700, 400)))
 t1 <- nca(data)
 assert("NCA estimates are correct (AUCinf)", round(t1$auc_inf) == 9164)
 assert("NCA estimates are correct (AUCt)", round(t1$auc_t) == 6824)
@@ -71,8 +71,8 @@ assert("BMI=30 female 80kg",
 
 ## PK functions
 assert("PK 1cmt iv steady state",
-  round(tail(pk_1cmt_iv_ss(tau = 12, t_inf = 2), 1)$dv,3) == 0.954
+  round(tail(pk_1cmt_inf_ss(dose = 100, tau = 12, t_inf = 2, CL = 5, V = 50), 1)$dv,3) == 0.954
 )
 assert("PK 1cmt iv steady state by summation",
-  round(tail(pk_1cmt_iv(tau = 12, t_inf = 2, t=seq(from=0, to=10*12, by=.2))$dv,1), 3) == 0.954
+  round(tail(pk_1cmt_inf(dose = 100, tau = 12, t_inf = 2, CL = 5, V = 50, t=seq(from=0, to=10*12, by=.2))$dv,1), 3) == 0.954
 )

@@ -1,4 +1,4 @@
-#' PK of iv 1 compartment drug at steady state
+#' Concentration predictions for 1-compartmental PK model with infusion dosing at steady state
 #'
 #' @param t vector of time
 #' @param t_inf infusion time
@@ -6,15 +6,15 @@
 #' @param tau dosing interval
 #' @param CL clearance
 #' @param V volume of distribution
-#' @param ruv residual error (list)
+#' @param ruv residual variability, specified as list with optional arguments for proportional, additive, or exponential components, e.g. `list(prop=0.1, add=1, exp=0)`
 #' @export
-pk_1cmt_iv_ss <- function(
+pk_1cmt_inf_ss <- function(
     t = c(0:24),
     dose = 100,
     t_inf = 1,
-    tau = 8,
-    CL = 5,
-    V = 50,
+    tau = 12,
+    CL = 3,
+    V = 30,
     ruv = NULL
   ) {
   k <- CL / V
