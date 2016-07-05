@@ -14,7 +14,7 @@ pct_for_age_generic(age = NULL, value = NULL, sex = NULL,
 
 \item{sex}{either `male` or `female`}
 
-\item{variable}{weith or height?}
+\item{variable}{weight or height?}
 
 \item{...}{parameters passed to `read_who_table()`}
 }

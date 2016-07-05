@@ -8,13 +8,13 @@ calc_ibw(weight = NULL, height = NULL, age = NULL, sex = "male",
   method_children = "standard", method_adults = "devine", digits = NULL)
 }
 \arguments{
-\item{weight}{weight in kg}
+\item{weight}{weight in kg, can be vector}
 
-\item{height}{height in cm}
+\item{height}{height in cm, can be vector}
 
-\item{age}{age in years}
+\item{age}{age in years, can be vector}
 
-\item{sex}{either `male` or `female`}
+\item{sex}{either `male` or `female`, can be vector}
 
 \item{method_children}{method to use for children >1 and <18 years. Choose from `standard`, `mclaren` (McLaren DS, Read WWC. Lancet. 1972;2:146-148.), `moore` (Moore DJ et al. Nutr Res. 1985;5:797-799), `bmi` (), `ada` (American Dietary Association)}
 

@@ -6,7 +6,7 @@
 #' @param age age in years
 #' @param sex either `male` or `female`
 #' @param value height in kg. Optional, if specified, will calculate closest percentile and return in list as `percentile`
-#' @param variable weith or height?
+#' @param variable weight or height?
 #' @param ... parameters passed to `read_who_table()`
 pct_for_age_generic <- function(age = NULL, value = NULL, sex = NULL, variable="weight", ...) {
   if(is.null(age) || is.null(sex)) {
