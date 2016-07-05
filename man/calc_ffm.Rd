@@ -4,19 +4,32 @@
 \alias{calc_ffm}
 \title{Calculate fat-free mass}
 \usage{
-calc_ffm(weight = NULL, bmi = NULL, sex = NULL)
+calc_ffm(weight = NULL, bmi = NULL, sex = NULL, height = NULL,
+  method = "green", digits = 1)
 }
 \arguments{
-\item{weight}{weight}
+\item{weight}{weight in kg}
 
-\item{bmi}{BMI}
+\item{bmi}{BMI, only used in `green` method. If `weight` and `height` are both specified, `bmi` will be calculated on-the-fly.}
 
-\item{sex}{sex}
+\item{sex}{sex, either `male` of `female`}
+
+\item{height}{height in cm, only required for `holford` method, can be used instead of `bmi` for `green` method}
+
+\item{method}{estimation method, either `green` (default), `holford`}
 }
 \description{
-Get an estimate of body-surface area based on weight and height.
+Get an estimate of body-surface area based on weight, height, and sex.
+}
+\details{
+References:
+`green`: Janmahasatian et al. Clin Pharmacokinet. 2005;44(10):1051-65)
+`holford`: McCune J et al. Clin Cancer Res 2013
+`james`: Absalom AR et al. Br J Anaesth 2009; 103:26-37
+`hume`: Hume R et al. J Clin Pathol. 1966 Jul; 19(4):389-91.
+`boer`: Boer P et al. Am J Physiol 1984; 247: F632-5
 }
 \references{
-Quantification of Lean Bodyweight Sarayut Janmahasatian,1 Stephen B. Duffull,1,2 Susan Ash,3 Leigh C. Ward,4 Nuala M. Byrne5 and Bruce Green1,2
+Quantification of Lean Bodyweight
 }
 
