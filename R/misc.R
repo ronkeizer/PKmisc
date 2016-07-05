@@ -9,20 +9,3 @@ is.nil <- function(x) {
 #' factors or characters to numeric
 #' @param x value
 as.num <- function(x) return (as.numeric(as.character(x)))
-
-
-#' Convert inch to cm
-#'
-#' @param inch vector
-#' @export
-inch2cm <- function(inch) {
-  return(inch*2.54)
-}
-
-#' Convert cm to inch
-#'
-#' @param cm vector
-#' @export
-cm2inch <- function(cm) {
- return(cm/2.54)
-}

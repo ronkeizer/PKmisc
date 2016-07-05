@@ -25,6 +25,15 @@ Miscellaneous PK tools
 - `calc_egfr()`: eGFR calculation using various equations
 - `convert_creat_assay()`: convert between various creatinine assays (Jaffe, IDMS, etc)
 
+## Conversions
+
+- `kg2lbs()`: kg to pounds
+- `lbs2kg()`: pounds to kg
+- `cm2inch()`: cm to inches
+- `inch2cm()`: inches to cm
+- `conc2mol()`: concentration to molar
+- `mol2conc()`: molar to concentration
+
 ## PK compartmental equations
 
 Functions to simulate concentrations for linear PK models.
