@@ -4,19 +4,19 @@
 \alias{conc2mol}
 \title{Convert concentration to molar}
 \usage{
-conc2mol(conc = NULL, unit = NULL, mol_weight = NULL,
-  unit_out = "mol/l")
+conc2mol(conc = NULL, unit_conc = NULL, mol_weight = NULL,
+  unit_mol = NULL)
 }
 \arguments{
 \item{conc}{concentration in e.g. g/L}
 
-\item{unit, }{one of `g/l`, `mg/l`, `microg/l`, `mcg/l", `ng/l`, `mg/ml`, `microg/ml`, `mcg/ml`, `ng/ml`}
+\item{unit_conc, }{one of `g/l`, `mg/l`, `microg/l`, `mcg/l", `ng/l`, `mg/ml`, `microg/ml`, `mcg/ml`, `ng/ml`}
 
 \item{mol_weight}{concentration in g/mol}
 
-\item{unit_out}{one of `mol/L`, `mmol/mL`, `mmol/L`}
+\item{unit_mol}{one of `mol/L`, `mmol/mL`, `mmol/L`}
 }
 \description{
-Assuming units of concentration and molecular weight are in same units of weight and volume
+Convert concentration to molar
 }
 
