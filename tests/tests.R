@@ -76,3 +76,18 @@ assert("PK 1cmt iv steady state",
 assert("PK 1cmt iv steady state by summation",
   round(tail(pk_1cmt_inf(dose = 100, tau = 12, t_inf = 2, CL = 5, V = 50, t=seq(from=0, to=10*12, by=.2))$dv,1), 3) == 0.954
 )
+
+## Dose calculation:
+assert("PK 2cmt infusion dose calculation",
+       round(pk_2cmt_inf_dose_from_cmin(cmin = .1, tau = 24, t_inf = 1,
+                                  CL = 10, V = 50, Q = 5, V2 = 100), 1) == 84.6)
+assert("PK 1cmt bolus dose calculation",
+       round(pk_2cmt_bolus_dose_from_cmin(cmin = .1, tau = 24,
+                             CL = 10, V = 50, Q = 5, V2 = 100),1) == 86)
+assert("PK 1cmt bolus dose calculation",
+       round(pk_1cmt_bolus_dose_from_cmin(cmin = .1, tau = 24,
+                             CL = 10, V = 50), 1) == 602.6)
+assert("PK 1cmt infusion dose calculation",
+       round(pk_1cmt_inf_dose_from_cmin(cmin = .1, tau = 24, t_inf = 1,
+                           CL = 10, V = 50),1) == 544.3)
+

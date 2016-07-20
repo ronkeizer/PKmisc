@@ -5,7 +5,7 @@
 \title{Calculate fat-free mass}
 \usage{
 calc_ffm(weight = NULL, bmi = NULL, sex = NULL, height = NULL,
-  method = "green", digits = 1)
+  age = NULL, method = "green", digits = 1)
 }
 \arguments{
 \item{weight}{total body weight in kg}
@@ -16,14 +16,17 @@ calc_ffm(weight = NULL, bmi = NULL, sex = NULL, height = NULL,
 
 \item{height}{height in cm, only required for `holford` method, can be used instead of `bmi` for `green` method}
 
-\item{method}{estimation method, either `green` (default) or `holford`}
+\item{age}{age, only used for Storset equation}
+
+\item{method}{estimation method, either `green` (default), `holford`, or `storset`}
 }
 \description{
-Get an estimate of body-surface area based on weight, height, and sex.
+Get an estimate of body-surface area based on weight, height, and sex (and age for Storset equation).
 }
 \details{
 References:
 `green`: Janmahasatian et al. Clin Pharmacokinet. 2005;44(10):1051-65)
 `holford`: McCune J et al. Clin Cancer Res 2013
+`storset`: Storset E et al. TDM 2016
 }
 

@@ -57,3 +57,15 @@ Functions to simulate concentrations for linear PK models.
 | `pk_2cmt_bolus_ss()` | 2 | bolus | steady state | concentration table |
 | `pk_2cmt_bolus_cmin_ss()` | 2 | bolus | steady state | Cmin |
 | `pk_2cmt_bolus_cmax_ss()` | 2 | bolus | steady state | Cmax |
+
+## Dose calculations
+
+Functions to calculate the dose expected to achieve a specific target exposure.
+
+| function | compartments | administration | target | output |
+| --- | --- | --- | --- | --- |
+| `pk_1cmt_inf_dose_for_cmin` | 1 | infusion | cmin | dose |
+| `pk_1cmt_bolus_dose_for_cmin` | 1 | bolus | cmin | dose |
+| `pk_2cmt_inf_dose_for_cmin()` | 2 | infusion | cmin | dose |
+| `pk_2cmt_bolus_dose_for_cmin()` | 2 | bolus | cmin | dose |
+
