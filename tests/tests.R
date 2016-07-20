@@ -49,6 +49,17 @@ l <- calc_egfr(
   relative = FALSE)
 assert("multiple calc egfr malmo-lund rev", round(l$value) == c(65,73, 67,74))
 
+## ABW
+assert("ABW no height specified", has_error(calc_abw(weight = 80))) # missing height
+assert("ABW 80kg/180cm", round(calc_abw(weight = 80, height = 180, age = 50), 1) == 77.0)
+assert("ABW 50kg/150cm", round(calc_abw(weight = 50, height = 150, age = 20), 1) == 48.7)
+assert("ABW wt=50kg, IBW=40", round(calc_abw(weight = 50, ibw = 40), 1) == 44.0)
+
+## BMI
+assert("BMI no height specified", has_error(calc_bmi(weight = 80))) # missing height
+assert("BMI 80kg/180cm", round(calc_bmi(weight = 80, height = 180), 1) == 24.7)
+assert("BMI 50kg/130cm", round(calc_bmi(weight = 50, height = 130), 1) == 29.6)
+
 ## FFM
 assert("BMI=20 male 80kg",
        round(calc_ffm (
@@ -90,4 +101,12 @@ assert("PK 1cmt bolus dose calculation",
 assert("PK 1cmt infusion dose calculation",
        round(pk_1cmt_inf_dose_from_cmin(cmin = .1, tau = 24, t_inf = 1,
                            CL = 10, V = 50),1) == 544.3)
+
+## Misc
+assert("add RUV all 0", add_ruv(1:100,ruv = list(prop = 0, add = 0, exp = 0)) == 1:100)
+assert("add RUV prop err", add_ruv(1:100, ruv = list(prop = 0.1, add = 0, exp = 0)) != 1:100)
+assert("add RUV prop err", abs(1-mean(add_ruv(1:100, ruv = list(prop = 0.1, add = 0, exp = 0)) / 1:100)) < 0.02)
+assert("add RUV add err", add_ruv(1:100, ruv = list(prop = 0, add = 0.1, exp = 0)) != 1:100)
+assert("add RUV exp err", add_ruv(1:100, ruv = list(prop = 0, add = 0, exp = 0.1)) != 1:100)
+
 
