@@ -3,5 +3,10 @@ sudo: required
 warnings_are_errors: false
 
 r_packages:
+  - covr
+r_binary_packages:
  - testit
-  
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
+  - bash <(curl -s https://codecov.io/bash)
