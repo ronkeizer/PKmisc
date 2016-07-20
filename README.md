@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ronkeizer/PKmisc.svg?branch=master)](https://travis-ci.org/ronkeizer/PKmisc)
+[![codecov](https://codecov.io/gh/ronkeizer/PKmisc/branch/master/graph/badge.svg)](https://codecov.io/gh/ronkeizer/PKmisc)
 
 # PKmisc
 Miscellaneous equations and tools for clinical pharmacokinetics
