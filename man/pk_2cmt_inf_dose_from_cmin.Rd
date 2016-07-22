@@ -22,8 +22,6 @@ pk_2cmt_inf_dose_from_cmin(cmin = 1, tau = 12, t_inf = 1, CL = 3,
 \item{Q}{inter-compartimental clearance}
 
 \item{V2}{volume of peripheral compartment}
-
-\item{dose}{dose}
 }
 \description{
 Calculate dose to achieve steady state trough

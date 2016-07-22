@@ -18,8 +18,6 @@ pk_1cmt_inf_dose_from_cmin(cmin = 1, tau = 12, t_inf = 1, CL = 3,
 \item{CL}{clearance}
 
 \item{V}{volume of distribution}
-
-\item{dose}{dose}
 }
 \description{
 Calculate dose to achieve steady state trough

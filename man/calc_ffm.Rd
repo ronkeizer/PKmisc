@@ -19,6 +19,8 @@ calc_ffm(weight = NULL, bmi = NULL, sex = NULL, height = NULL,
 \item{age}{age, only used for Storset equation}
 
 \item{method}{estimation method, either `green` (default), `holford`, or `storset`}
+
+\item{digits}{round to number of digits}
 }
 \description{
 Get an estimate of body-surface area based on weight, height, and sex (and age for Storset equation).

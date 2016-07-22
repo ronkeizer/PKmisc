@@ -10,11 +10,15 @@ calc_lbw(weight = NULL, bmi = NULL, sex = NULL, height = NULL,
 \arguments{
 \item{weight}{total body weight in kg}
 
+\item{bmi}{bmi}
+
 \item{sex}{sex, either `male` of `female`}
 
 \item{height}{height in cm}
 
 \item{method}{estimation method, either `green` (default), `holford`}
+
+\item{digits}{round to number of digits}
 }
 \description{
 Get an estimate of lean body weight (LBW) based on weight, height, and sex.

@@ -1,8 +1,7 @@
 #' Calculate dose to achieve steady state Cmax
 #' for 2-compartmental PK model bolus dosing at steady state
 #'
-#' @param cmin desired trough concentration
-#' @param dose dose
+#' @param cmax desired trough concentration
 #' @param tau dosing interval
 #' @param CL clearance
 #' @param V volume of distribution

@@ -8,6 +8,9 @@
 #' @param ... parameters passed to `read_who_table()`
 #' @export
 pct_height_for_age <- function(age = NULL, height = NULL, sex = NULL, ...) {
+  if(is.null(age)) {
+    stop("Age required.")
+  }
   if(length(age) == 1) {
     pct <- pct_for_age_generic(age = age, value = height, sex = sex, variable = "height", ...)
   } else {

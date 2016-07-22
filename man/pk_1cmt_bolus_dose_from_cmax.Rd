@@ -15,8 +15,6 @@ pk_1cmt_bolus_dose_from_cmax(cmax = 1, tau = 12, CL = 3, V = 30)
 \item{CL}{clearance}
 
 \item{V}{volume of distribution}
-
-\item{dose}{dose}
 }
 \description{
 Calculate dose to achieve steady state Cmax

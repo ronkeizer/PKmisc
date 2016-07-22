@@ -138,5 +138,12 @@ assert("Conc --> mol", conc2mol(conc = 1, mol_weight = 100, unit_conc = "mg/L", 
 assert("Mol --> conc", mol2conc(mol = 1, mol_weight = 100, unit_conc = "g/L", unit_mol = "mol/L")$value == 100)
 assert("cm --> inch", round(cm2inch(cm = 100), 2) == 39.37)
 assert("inch --> cm", round(inch2cm(inch = 39.37), 2) == 100)
-assert("kg --> lbs", round(kg2lbs(kg = 100), 2) == 220.462)
+assert("kg --> lbs", round(kg2lbs(kg = 100), 2) == 220.46)
 assert("lbs --> kg", round(lbs2kg(lbs = 220.462), 2) == 100)
+
+## pct
+assert("Pct weight for age", pct_weight_for_age(age = 1, weight = 9, sex="male")$percentile == 26.5)
+assert("Pct weight for age", pct_weight_for_age(age = 1, weight = 9, sex="female")$percentile == 51.7)
+assert("Pct weight for age", length(names(pct_weight_for_age(age = 1, sex="male"))) > 12)
+assert("Pct weight for age", has_error(pct_weight_for_age(weight = 9, sex="male")))
+assert("Pct weight for age", has_error(pct_weight_for_age()))

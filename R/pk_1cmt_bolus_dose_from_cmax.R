@@ -2,7 +2,6 @@
 #' for 1-compartmental PK model bolus dosing at steady state
 #'
 #' @param cmax desired trough concentration
-#' @param dose dose
 #' @param tau dosing interval
 #' @param CL clearance
 #' @param V volume of distribution

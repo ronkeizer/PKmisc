@@ -3,7 +3,6 @@
 #'
 #' @param cmax desired trough concentration
 #' @param t_inf infusion time
-#' @param dose dose
 #' @param tau dosing interval
 #' @param CL clearance
 #' @param V volume of distribution

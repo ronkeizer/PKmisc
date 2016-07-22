@@ -11,9 +11,11 @@
 #' `boer`: Boer P et al. Am J Physiol 1984; 247: F632-5
 #'
 #' @param weight total body weight in kg
+#' @param bmi bmi
 #' @param height height in cm
 #' @param sex sex, either `male` of `female`
 #' @param method estimation method, either `green` (default), `holford`
+#' @param digits round to number of digits
 #' @export
 calc_lbw <- function (
   weight = NULL,

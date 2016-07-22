@@ -20,8 +20,6 @@ pk_2cmt_bolus_dose_from_cmin(cmin = 1, tau = 12, CL = 3, V = 30,
 \item{Q}{inter-compartimental clearance}
 
 \item{V2}{volume of peripheral compartment}
-
-\item{dose}{dose}
 }
 \description{
 Calculate dose to achieve steady state trough

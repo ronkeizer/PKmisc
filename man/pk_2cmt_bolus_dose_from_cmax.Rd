@@ -9,6 +9,8 @@ pk_2cmt_bolus_dose_from_cmax(cmax = 1, tau = 12, CL = 3, V = 30,
   Q = 2, V2 = 20)
 }
 \arguments{
+\item{cmax}{desired trough concentration}
+
 \item{tau}{dosing interval}
 
 \item{CL}{clearance}
@@ -18,10 +20,6 @@ pk_2cmt_bolus_dose_from_cmax(cmax = 1, tau = 12, CL = 3, V = 30,
 \item{Q}{inter-compartimental clearance}
 
 \item{V2}{volume of peripheral compartment}
-
-\item{cmin}{desired trough concentration}
-
-\item{dose}{dose}
 }
 \description{
 Calculate dose to achieve steady state Cmax

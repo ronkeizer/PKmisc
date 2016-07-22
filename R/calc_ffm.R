@@ -13,6 +13,7 @@
 #' @param sex sex, either `male` of `female`
 #' @param age age, only used for Storset equation
 #' @param method estimation method, either `green` (default), `holford`, or `storset`
+#' @param digits round to number of digits
 #' @export
 calc_ffm <- function (
   weight = NULL,
