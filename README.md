@@ -71,4 +71,5 @@ Functions to calculate the dose expected to achieve a specific target exposure.
 | `pk_1cmt_bolus_dose_for_cmax` | 1 | bolus | cmax | dose |
 | `pk_2cmt_inf_dose_for_cmax()` | 2 | infusion | cmax | dose |
 | `pk_2cmt_bolus_dose_for_cmax()` | 2 | bolus | cmax | dose |
-
+| `dose2auc()` | 1 | - | auc | auc |
+| `auc2dose()` | 1 | - | auc | dose |

@@ -125,6 +125,14 @@ assert("PK 1cmt infusion dose calculation",
        round(pk_1cmt_inf_dose_from_cmax(cmax = 10, tau = 24, t_inf = 1,
                                         CL = 10, V = 50),1) == 547.1)
 
+## auc2dose
+assert("auc2dose empty call", has_error(auc2dose()))
+assert("auc2dose ", auc2dose(auc = 500, CL=10, V=100) == 5000)
+assert("auc2dose partial auc", round(auc2dose(auc = 500, CL=10, V=100, t_auc = 7)) == 9932)
+assert("dose2auc empty call", has_error(dose2auc()))
+assert("dose2auc ", dose2auc(dose = 5000, CL=10, V=100) == 500)
+assert("dose2auc partial auc", round(dose2auc(dose = 9932, CL=10, V=100, t_auc = 7)) == 500)
+
 ## Misc
 assert("add RUV all 0", add_ruv(1:100,ruv = list(prop = 0, add = 0, exp = 0)) == 1:100)
 assert("add RUV prop err", add_ruv(1:100, ruv = list(prop = 0.1, add = 0, exp = 0)) != 1:100)
