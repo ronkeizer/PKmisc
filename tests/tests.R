@@ -50,10 +50,19 @@ l <- calc_egfr(
 assert("multiple calc egfr malmo-lund rev", round(l$value) == c(65,73, 67,74))
 
 ## ABW
-assert("ABW no height specified", has_error(calc_abw(weight = 80))) # missing height
+assert("ABW no height specified", has_error(calc_abw(weight = 80)))   # missing height / ibw
+assert("ABW no weight specified", has_error(calc_abw(weight = NULL))) # missing weight
 assert("ABW 80kg/180cm", round(calc_abw(weight = 80, height = 180, age = 50), 1) == 77.0)
 assert("ABW 50kg/150cm", round(calc_abw(weight = 50, height = 150, age = 20), 1) == 48.7)
 assert("ABW wt=50kg, IBW=40", round(calc_abw(weight = 50, ibw = 40), 1) == 44.0)
+
+## LBW
+assert("LBW no height specified", has_error(calc_lbw(weight = 80, sex = "female")))
+assert("LBW no weight specified", has_error(calc_lbw(weight = NULL, sex = "female")))
+assert("LBW no sex specified", has_error(calc_lbw(weight = 80, height=180)))
+assert("LBW 80kg/180cm", round(calc_lbw(weight = 80, height = 180, sex = "female")$value, 1) == 56.4)
+assert("LBW 50kg/150cm", round(calc_lbw(weight = 50, height = 150, sex = "male")$value, 1) == 40.8)
+assert("LBW output is list", class(calc_lbw(weight = 50, height = 150, sex = "male")) == "list")
 
 ## BMI
 assert("BMI no height specified", has_error(calc_bmi(weight = 80))) # missing height
@@ -123,4 +132,11 @@ assert("add RUV prop err", abs(1-mean(add_ruv(1:100, ruv = list(prop = 0.1, add 
 assert("add RUV add err", add_ruv(1:100, ruv = list(prop = 0, add = 0.1, exp = 0)) != 1:100)
 assert("add RUV exp err", add_ruv(1:100, ruv = list(prop = 0, add = 0, exp = 0.1)) != 1:100)
 
-
+## conversions
+assert("Conc --> mol", conc2mol(conc = 1, mol_weight = 100, unit_conc = "g/L", unit_mol = "mol/L")$value == 0.01)
+assert("Conc --> mol", conc2mol(conc = 1, mol_weight = 100, unit_conc = "mg/L", unit_mol = "mol/L")$value == 1e-5)
+assert("Mol --> conc", mol2conc(mol = 1, mol_weight = 100, unit_conc = "g/L", unit_mol = "mol/L")$value == 100)
+assert("cm --> inch", round(cm2inch(cm = 100), 2) == 39.37)
+assert("inch --> cm", round(inch2cm(inch = 39.37), 2) == 100)
+assert("kg --> lbs", round(kg2lbs(kg = 100), 2) == 220.462)
+assert("lbs --> kg", round(lbs2kg(lbs = 220.462), 2) == 100)

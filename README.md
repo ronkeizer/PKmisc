@@ -5,7 +5,6 @@
 Miscellaneous equations and tools for clinical pharmacokinetics
 
 ## Tools
-
 Miscellaneous PK tools
 
 - `nca()`: Non-compartmental analysis

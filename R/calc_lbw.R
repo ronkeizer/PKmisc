@@ -26,7 +26,7 @@ calc_lbw <- function (
   if(! method %in% methods) {
     stop(paste0("Unknown estimation method, please choose from: ", paste(methods, collapse=" ")))
   }
-  if(!(sex %in% c("male", "female"))) {
+  if(is.null(sex) || !(sex %in% c("male", "female"))) {
     stop("Sex needs to be either male or female!")
   }
   if(method %in% c("boer", "james", "hume")) {
