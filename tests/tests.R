@@ -128,7 +128,7 @@ assert("PK 1cmt infusion dose calculation",
 ## Misc
 assert("add RUV all 0", add_ruv(1:100,ruv = list(prop = 0, add = 0, exp = 0)) == 1:100)
 assert("add RUV prop err", add_ruv(1:100, ruv = list(prop = 0.1, add = 0, exp = 0)) != 1:100)
-assert("add RUV prop err", abs(1-mean(add_ruv(1:100, ruv = list(prop = 0.1, add = 0, exp = 0)) / 1:100)) < 0.02)
+assert("add RUV prop err", abs(1-mean(add_ruv(1:100, ruv = list(prop = 0.1, add = 0, exp = 0)) / 1:100)) < 0.04)
 assert("add RUV add err", add_ruv(1:100, ruv = list(prop = 0, add = 0.1, exp = 0)) != 1:100)
 assert("add RUV exp err", add_ruv(1:100, ruv = list(prop = 0, add = 0, exp = 0.1)) != 1:100)
 
