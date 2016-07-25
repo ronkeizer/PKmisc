@@ -31,6 +31,12 @@ pct_for_age_generic <- function(age = NULL, value = NULL, sex = NULL, variable="
       type = "hfa" # naming inconsistyency from WHO
     }
   }
+  if(variable == "bmi") {
+    type <- "bfa"
+    if(age >= 5.1) {
+      type <- "bmi"
+    }
+  }
   dat <- read_who_table(sex=sex, age=age, type=type, download=FALSE)
   tmp <- dat[order(abs(age - dat[,1])),][1,-(1:4)]
   pct <- as.list(tmp)

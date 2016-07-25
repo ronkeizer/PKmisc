@@ -15,7 +15,7 @@ read_who_table <- function(
   if(is.null(age)) {
     stop("Age required!")
   }
-  if(type %in% c("wfa", "lhfa", "hfa", "wfl")) {
+  if(type %in% c("wfa", "lhfa", "hfa", "wfl", "bmi", "bfa")) {
     str_sex <- "boys"
     if(tolower(sex) == "female") {
       str_sex <- "girls"

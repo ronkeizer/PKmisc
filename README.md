@@ -17,8 +17,9 @@ Miscellaneous PK tools
 - `calc_ibw()`: Ideal body weight, using various equations for children and adults
 - `calc_lbw()`: Lean body weight
 - `calc_abw()`: Adjusted body weight (for obese patients)
-- `pct_weight_for_age()`: calculate percentile of weight given age (for kids <= 10yrs)
-- `pct_height_for_age()`: calculate percentile of height given age (for kids <= 19yrs)
+- `pct_weight_for_age()`: calculate percentile of weight given age (for kids <= 10 yrs)
+- `pct_height_for_age()`: calculate percentile of height given age (for kids <= 19 yrs)
+- `pct_bmi_for_age()`: calculate percentile of height given age (for kids <= 19 yrs)
 
 ## Clinical chemistry
 

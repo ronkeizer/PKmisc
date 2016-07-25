@@ -160,3 +160,5 @@ assert("Pct weight for age", pct_weight_for_age(age = 1, weight = 9, sex="female
 assert("Pct weight for age", length(names(pct_weight_for_age(age = 1, sex="male"))) > 12)
 assert("Pct weight for age", has_error(pct_weight_for_age(weight = 9, sex="male")))
 assert("Pct weight for age", has_error(pct_weight_for_age()))
+assert("Pct bmi for age", pct_bmi_for_age(age = 2, bmi = 16, sex="male")$percentile == 57.7)
+assert("Pct bmi for age", pct_bmi_for_age(age = 6, bmi = 16, sex="female")$percentile == 66.1)

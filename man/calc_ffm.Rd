@@ -28,7 +28,7 @@ Get an estimate of body-surface area based on weight, height, and sex (and age f
 \details{
 References:
 `green`: Janmahasatian et al. Clin Pharmacokinet. 2005;44(10):1051-65)
-`holford`: McCune J et al. Clin Cancer Res 2013
+`al-sallami`: Al-Sallami et al. Clin Pharmacokinet 2015
 `storset`: Storset E et al. TDM 2016
 }
 
