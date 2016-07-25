@@ -88,6 +88,11 @@ assert("BMI=30 female 80kg",
          bmi = 30,
          sex = "female"
        )$value) == 46)
+assert("FFM Al-Sallami",
+       round(calc_ffm (
+         weight = 60, height = 140, age = 12,
+         sex = "female", method = "al-sallami"
+       )$value) == 36)
 
 ## PK functions
 assert("PK 1cmt iv steady state",

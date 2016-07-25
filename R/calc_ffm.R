@@ -4,7 +4,7 @@
 #'
 #' References:
 #' `green`: Janmahasatian et al. Clin Pharmacokinet. 2005;44(10):1051-65)
-#' `holford`: McCune J et al. Clin Cancer Res 2013
+#' `al-sallami`: Al-Sallami et al. Clin Pharmacokinet 2015
 #' `storset`: Storset E et al. TDM 2016
 #'
 #' @param weight total body weight in kg
@@ -23,7 +23,7 @@ calc_ffm <- function (
   age = NULL,
   method = "green",
   digits = 1) {
-  methods <- c("green", "holford", "storset")
+  methods <- c("green", "al-sallami", "storset")
   if(! method %in% methods) {
     stop(paste0("Unknown estimation method, please choose from: ", paste(methods, collapse=" ")))
   }
@@ -44,14 +44,18 @@ calc_ffm <- function (
       }
     }
   }
-  if(method == "holford") {
-    whs_max <- 42.92
-    whs_50 <- 30.93
-    if(sex == "female") {
-      whs_max <- 37.99
-      whs_max <- 35.98
+  if(method == "al-sallami") {
+    if(is.null(weight) || (is.null(bmi) & is.null(height)) || is.null(sex) || is.null(age)) {
+      stop("Equation needs weight, BMI or height, and sex of patient!")
     }
-    ffm <- (whs_max * (height/100)^2 * weight) / (whs_50 * (height/100)^2 + weight)
+    if(is.null(bmi)) {
+      bmi <- calc_bmi(weight = weight, height = height)
+    }
+    if(sex == "female") {
+      ffm <- (1.11 + ((1-1.11)/(1+(age/7.1)^-1.1))) * ((9270 * weight)/(8780 + (244 * bmi)))
+    } else {
+      ffm <- (0.88 + ((1-0.88)/(1+(age/13.4)^-12.7))) * ((9270 * weight)/(6680 + (216 * bmi)))
+    }
   }
   if(method == "storset") { # based on kidney transplant patient
     if(is.null(weight) || is.null(height) || is.null(sex) || is.null(age)) {
