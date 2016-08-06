@@ -94,6 +94,16 @@ assert("FFM Al-Sallami",
          sex = "female", method = "al-sallami"
        )$value) == 36)
 
+## Test creatinine estimates
+assert(calc_creat(sex = c("male", "female"), age = c(20,20))$value == c(84.0, 69.5))
+assert(calc_creat(sex = c("male", "female"), age = c(16,16))$value == c(64.9, 60.1))
+assert(calc_creat(sex = c("male", "female"), age = c(16,14))$value == c(64.9, 50.6))
+
+## convert creatinine
+assert(round(convert_creat_unit(84, unit_in = "mmol/L")$value, 3) == 0.95)
+assert(round(convert_creat_unit(1.2, unit_in = "mg/dL")$value,3) == 106.104)
+assert(round(convert_creat_unit(1.2)$value,3) == 106.104)
+
 ## PK functions
 assert("PK 1cmt iv steady state",
   round(tail(pk_1cmt_inf_ss(dose = 100, tau = 12, t_inf = 2, CL = 5, V = 50), 1)$dv,3) == 0.954

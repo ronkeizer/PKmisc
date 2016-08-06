@@ -24,7 +24,9 @@ Miscellaneous PK tools
 ## Clinical chemistry
 
 - `calc_egfr()`: eGFR calculation using various equations
+- `calc_creat()`: mean serum creatinine (given age and sex)
 - `convert_creat_assay()`: convert between various creatinine assays (Jaffe, IDMS, etc)
+- `convert_creat_unit()`: convert between creatinine units (mmol/L, mg/dL)
 
 ## Conversions
 
