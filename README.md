@@ -5,9 +5,10 @@
 Miscellaneous equations and tools for clinical pharmacokinetics
 
 ## Tools
-Miscellaneous PK tools
+Miscellaneous functions
 
-- `nca()`: Non-compartmental analysis
+- `nca()`: Non-compartmental PK analysis, e.g. AUC, half-life, etc.
+- `find_nearest_dose()`: Find nearest available dose based on smallest available dosing unit
 
 ## Anthropomorphic equations
 
