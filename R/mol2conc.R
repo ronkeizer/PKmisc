@@ -37,14 +37,16 @@ mol2conc <- function(
       fact <- 1e9
     }
     conc <- (mol * mol_weight) * fact
-    units_mol <- c("mol/l", "mmol/l", "mmol/ml")
+    units_mol <- c("mol/l", "mmol/l", "mmol/ml", "mumol/l", "micromol/l")
     if(tolower(unit_mol) %in% units_mol) {
-      if(tolower(unit_mol) == "mol/l" || tolower(unit_mol) == "mmol/ml") {
-        return(list(value = conc, unit = unit_mol))
-      }
+      fact_mol <- 1
       if(tolower(unit_mol) == "mmol/l") {
-        return(list(value = conc/1e3, unit = unit_mol))
+        fact_mol <- 1e3
       }
+      if(tolower(unit_mol) == "mumol/l" || tolower(unit_mol) == "micromol/l") {
+        fact_mol <- 1e6
+      }
+      return(list(value = conc / fact_mol, unit = unit_conc))
     } else {
       stop(paste0("Unknown unit for molar concentration, choose one of: ", paste(units_mol, collapse=" ")))
     }
