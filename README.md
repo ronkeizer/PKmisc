@@ -33,6 +33,7 @@ Miscellaneous functions
 
 - `kg2lbs()`: kg to pounds
 - `lbs2kg()`: pounds to kg
+- `weight2kg()`: any weight unit to kg
 - `cm2inch()`: cm to inches
 - `inch2cm()`: inches to cm
 - `conc2mol()`: concentration to molar
