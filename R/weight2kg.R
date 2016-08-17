@@ -5,10 +5,10 @@
 #' @export
 weight2kg <- function(value, unit) {
   if (tolower(unit) %in% c("lbs","pound", "pounds")) {
-    value <- weight_df$value / 2.20462
+    value <- value / 2.20462
   }
   if (tolower(unit) %in% c("oz", "ounce", "ounces")) {
-    value <- weight_df$value / 35.274
+    value <- value / 35.274
   }
   return(value)
 }
