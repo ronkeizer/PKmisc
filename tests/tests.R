@@ -17,10 +17,12 @@ assert("BSA",
 ## eGFR
 err1 <- try(expr = { calc_egfr(scr = .5, weight = 4.5, method = "cockroft_gault") }, silent=TRUE)
 assert("Cockroft-gault error", class(err1[1]) == "character") # error message when no weight specified
-assert("Cockroft-gault",
-       round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockroft_gault")$value) == 111)
-assert("Cockroft-gault",
-       round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
+assert("Cockroft-gault", round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockroft_gault")$value) == 111)
+assert("Cockroft-gault", round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
+
+assert("Cockroft-gault ibw", round(calc_egfr(age = 50, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_adjusted",relative = FALSE)$value) == 131)
+assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_adjusted", relative = FALSE, factor = 0.3)$value) == 135)
+assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_ideal", relative = FALSE)$value) == 104)
 
 err2 <- try(expr = { calc_egfr(age = 40, weight = 80, scr = 1, method = "malmo_lund_rev", relative = FALSE) }, silent=TRUE)
 assert("Malmo-Lund error", class(err2[1]) == "character") # error message when no weight specified
@@ -53,8 +55,14 @@ assert("multiple calc egfr malmo-lund rev", round(l$value) == c(65,73, 67,74))
 assert("ABW no height specified", has_error(calc_abw(weight = 80)))   # missing height / ibw
 assert("ABW no weight specified", has_error(calc_abw(weight = NULL))) # missing weight
 assert("ABW 80kg/180cm", round(calc_abw(weight = 80, height = 180, age = 50), 1) == 77.0)
-assert("ABW 50kg/150cm", round(calc_abw(weight = 50, height = 150, age = 20), 1) == 48.7)
+assert("ABW 50kg/150cm", round(calc_abw(weight = 150, height = 150, age = 20), 1) == 88.7)
 assert("ABW wt=50kg, IBW=40", round(calc_abw(weight = 50, ibw = 40), 1) == 44.0)
+
+## IBW
+assert("IBW no height specified", has_error(calc_ibw(weight = 80)))   # missing height / ibw
+assert("IBW no weight specified", has_error(calc_ibw(weight = NULL))) # missing weight
+assert("IBW 80kg/180cm", round(calc_ibw(height = 180, age = 50), 1) == 75.0)
+assert("IBW 50kg/150cm", round(calc_ibw(height = 150, age = 20), 1) == 47.8)
 
 ## LBW
 assert("LBW no height specified", has_error(calc_lbw(weight = 80, sex = "female")))

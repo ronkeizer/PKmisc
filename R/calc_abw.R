@@ -5,9 +5,10 @@
 #' @param weight actual body weight in kg
 #' @param ibw ideal body weight in kg
 #' @param verbose show output?
+#' @param factor weighting factor, commonly 0.4 or 0.3
 #' @param ... parameters passed to ibw function (if `ibw` not specified)
 #' @export
-calc_abw <- function(weight=NULL, ibw=NULL, verbose = TRUE, ...) {
+calc_abw <- function(weight = NULL, ibw = NULL, factor = 0.4, verbose = TRUE, ...) {
   if(is.null(weight)) {
     stop("Weight needs to be specified!")
   }
@@ -20,6 +21,6 @@ calc_abw <- function(weight=NULL, ibw=NULL, verbose = TRUE, ...) {
   if(is.null(ibw)) {
     stop("IBW required for calculation of ABW.")
   }
-  abw <- ibw + (weight-ibw)*0.4
+  abw <- ibw + (weight-ibw) * factor
   return(abw)
 }

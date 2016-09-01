@@ -2,7 +2,7 @@
 #'
 #' Calculate the estimated glomerulal filtration rate, an estimate of renal function
 #'
-#' @param method eGFR estimation method, choose from `cockroft_gault`, `mdrd`, `malmo_lund_rev`, `schwartz`
+#' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_rev`, `schwartz`
 #' @param sex sex
 #' @param age age
 #' @param scr serum creatinine (mg/dL)
@@ -17,6 +17,7 @@
 #' @param relative `TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.
 #' @param unit_out `ml/min` (default), `L/hr`, or `mL/hr`
 #' @param preterm is patient preterm?
+#' @param ... arguments passed on
 #' @export
 calc_egfr <- function (
   method = "cockroft_gault",
@@ -33,15 +34,26 @@ calc_egfr <- function (
   ckd = FALSE,
   bsa_method = "dubois",
   relative = NULL,
-  unit_out = "mL/min"
+  unit_out = "mL/min",
+  ...
   ) {
-    available_methods <- c("cockroft_gault", "malmo_lund_rev", "mdrd", "schwartz", "schwartz_revised")
+    available_methods <- c("cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted", "malmo_lund_rev", "mdrd", "schwartz", "schwartz_revised")
     method <- tolower(method)
-    if(length(grep("cockroft", method)) > 0) {
-      method <- "cockroft_gault"
-    }
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
+    }
+    if(method == "cockroft_gault_ideal") {
+      if(is.nil(height) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
+        stop("Cockroft-Gault using ideal body weight requires: scr, sex, weight, height, and age as input!")
+      }
+      weight <- calc_ibw(height = height, age = age, sex = sex) # recalculate wt to ibw
+    }
+    if(method == "cockroft_gault_adjusted") {
+      if(is.nil(height) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
+        stop("Cockroft-Gault using ideal body weight requires: scr, sex, weight, height, and age as input!")
+      }
+      ibw <- calc_ibw(height = height, age = age, sex = sex)
+      weight <- calc_abw(weight = weight, ibw = ibw, ...) # recalculate wt to abw, potentially specify factor
     }
     if(is.null(scr_assay)) {
       scr_assay <- "jaffe"
@@ -104,7 +116,7 @@ calc_egfr <- function (
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
-        if(method == "cockroft_gault") {
+        if(method %in% c("cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted")) {
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
             stop("Cockroft-Gault equation requires: scr, sex, weight, and age as input!")
           }
