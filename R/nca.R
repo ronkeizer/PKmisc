@@ -22,6 +22,10 @@ nca <- function (
       stop("No time ('time') or dependent variable ('dv') data in supplied dataset")
     }
     mean_step <- function(x) { (x[1:(length(x)-1)] + x[2:length(x)]) / 2 }
+    if(sum(is.na(data$dv)) > 0) {
+      message(paste0("Removing ", sum(is.na(data$dv)), " datapoint(s) with missing concentration value."))
+      data <- data[!is.na(data$dv),]
+    }
     if (!is.null(dv_min)) { # protect against log <= 0
       if(sum(data$dv < dv_min) > 0) {
         data[data$dv < dv_min, ]$dv <- dv_min

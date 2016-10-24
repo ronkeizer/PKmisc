@@ -10,6 +10,11 @@ assert("NCA estimates are correct (AUCt)", round(t1$auc_t) == 6824)
 assert("NCA estimates are correct (css_t)", round(t1$css) == 853)
 assert("NCA estimates are correct (css_tau)", round(t1$css_tau) == 1137)
 
+## NCA with missing data
+data <- data.frame(cbind(time = c(0, 1, 2, 4, 6, 8),
+                         dv   = c(300, 1400, NA, 900, 700, 400)))
+t2 <- nca(data)
+
 ## BSA
 assert("BSA",
        round(calc_bsa(80, 180)$value,2) == 2.00)
