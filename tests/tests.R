@@ -33,12 +33,12 @@ assert("Cockroft-gault ibw", round(calc_egfr(age = 50, sex="male", weight = 150,
 assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_adjusted", relative = FALSE, factor = 0.3)$value) == 135)
 assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_ideal", relative = FALSE)$value) == 104)
 
-err2 <- try(expr = { calc_egfr(age = 40, weight = 80, scr = 1, method = "malmo_lund_rev", relative = FALSE) }, silent=TRUE)
+err2 <- try(expr = { calc_egfr(age = 40, weight = 80, scr = 1, method = "malmo_lund_revised", relative = FALSE) }, silent=TRUE)
 assert("Malmo-Lund error", class(err2[1]) == "character") # error message when no weight specified
 assert("Malmo-Lund revised",
-       round(calc_egfr(age = 40, sex="male", scr = 1, method = "malmo_lund_rev")$value) == 84)
+       round(calc_egfr(age = 40, sex="male", scr = 1, method = "malmo_lund_revised")$value) == 84)
 assert("Malmo-Lund revised",
-       round(calc_egfr(age = 40, sex="male", scr = 1, weight = 80, height = 180, method = "malmo_lund_rev", relative = FALSE)$value) == 97)
+       round(calc_egfr(age = 40, sex="male", scr = 1, weight = 80, height = 180, method = "malmo_lund_revised", relative = FALSE)$value) == 97)
 
 err3 <- try(expr = { calc_egfr(age = 0.5, scr = .5, weight = 4.5, method = "schwartz") }, silent=TRUE)
 assert("Schwartz revised",
@@ -50,7 +50,7 @@ assert("Schwartz",
        calc_egfr(age = 0.5, sex = "male", scr = .5, weight = 4.5, height = 50, method = "schwartz")$value == 33)
 
 l <- calc_egfr(
-  method = "malmo_lund_rev",
+  method = "malmo_lund_revised",
   weight = 45,
   age = 62,
   height = 156,

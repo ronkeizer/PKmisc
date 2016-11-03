@@ -10,7 +10,7 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
   bsa_method = "dubois", relative = NULL, unit_out = "mL/min")
 }
 \arguments{
-\item{method}{eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_rev`, `schwartz`}
+\item{method}{eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_revised`, `schwartz`}
 
 \item{sex}{sex}
 
