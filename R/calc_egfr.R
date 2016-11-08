@@ -37,7 +37,7 @@ calc_egfr <- function (
   unit_out = "mL/min",
   ...
   ) {
-    available_methods <- c("cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted", "malmo_lund_revised", "mdrd", "schwartz", "schwartz_revised")
+    available_methods <- c("cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted", "malmo_lund_revised", "malmo_lund_rev", "lund_malmo_revised", "lund_malmo_rev", "mdrd", "schwartz", "schwartz_revised")
     method <- tolower(method)
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
