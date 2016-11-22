@@ -50,9 +50,9 @@ calc_egfr <- function (
     }
     if(method == "cockroft_gault_adjusted") {
       if(is.nil(height) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
-        stop("Cockroft-Gault using ideal body weight requires: scr, sex, weight, height, and age as input!")
+        stop("Cockroft-Gault using adjusted body weight requires: scr, sex, weight, height, and age as input!")
       }
-      ibw <- calc_ibw(height = height, age = age, sex = sex)
+      ibw <- calc_ibw(weight = weight, height = height, age = age, sex = sex)
       weight <- calc_abw(weight = weight, ibw = ibw, ...) # recalculate wt to abw, potentially specify factor
     }
     if(is.null(scr_assay)) {

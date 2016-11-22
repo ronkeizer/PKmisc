@@ -71,8 +71,6 @@ calc_ibw <- function (
     }
   }
 
-  ibw <- NULL
-
   ## babies
   ibw <- rep(0, length(weight))
   if(any(age < 1)) {
