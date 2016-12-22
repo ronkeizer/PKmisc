@@ -9,6 +9,7 @@ Miscellaneous functions
 
 - `nca()`: Non-compartmental PK analysis, e.g. AUC, half-life, etc.
 - `find_nearest_dose()`: Find nearest available dose based on smallest available dosing unit
+- `find_nearest_interval()`: Find nearest (or nearest higher / nearest lower) dosing interval 
 
 ## Anthropomorphic equations
 
