@@ -1,5 +1,7 @@
 #' Convert serum creatinine from various assays to Jaffe
 #'
+#' Based on equations as reported in Srivastava et al. 2009 (Pediatr Res. 2009 Jan;65(1):113-6. doi: 10.1203/PDR.0b013e318189a6e8)
+#'
 #' @param scr vector of serum creatinine values
 #' @param from assay type, either `jaffe`, `enzymatic` or `idms`
 #' @param to assay type, either `jaffe`, `enzymatic` or `idms`
