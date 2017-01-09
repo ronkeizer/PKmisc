@@ -14,7 +14,7 @@ Miscellaneous functions
 ## Anthropomorphic equations
 
 - `calc_bsa()`: BSA calculation using various equations
-- `calc_ffm()`: Fat-free mass
+- `calc_ffm()`: Fat-free mass using various equations
 - `calc_bmi()`: Body mass index
 - `calc_ibw()`: Ideal body weight, using various equations for children and adults
 - `calc_lbw()`: Lean body weight
@@ -25,7 +25,7 @@ Miscellaneous functions
 
 ## Clinical chemistry
 
-- `calc_egfr()`: eGFR calculation using various equations
+- `calc_egfr()`: eGFR calculation using various equations (Cockroft-Gault, MDRD, Jelliffe, Jelliffe for unstable patients, Wright, Lund-Malmo revised, Schwartz, Schwartz revised)
 - `calc_creat()`: mean serum creatinine for children and adults (given age and sex)
 - `calc_creat_neo()`: typical serum creatinine for neonates given post-natal age
 - `convert_creat_assay()`: convert between various creatinine assays (Jaffe, IDMS, etc)

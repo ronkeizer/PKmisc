@@ -1,8 +1,16 @@
 #' Calculate eGFR
 #'
-#' Calculate the estimated glomerulal filtration rate, an estimate of renal function
+#' Calculate the estimated glomerulal filtration rate, an estimate of renal function using one of the following approaches:
+#' - Cockroft Gault (using weight, ideal body weight, or adjusted body weight)
+#' - Revised Lund-Malmo
+#' - Modification of Diet in Renal Disease study (MDRD)
+#' - Schwartz
+#' - Schwartz revised
+#' - Jelliffe
+#' - Jelliffe (for unstable renal function)
+#' - Wright
 #'
-#' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_revised`, `schwartz`
+#' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`
 #' @param sex sex
 #' @param age age
 #' @param scr serum creatinine (mg/dL)
@@ -37,7 +45,11 @@ calc_egfr <- function (
   unit_out = "mL/min",
   ...
   ) {
-    available_methods <- c("cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted", "malmo_lund_revised", "malmo_lund_rev", "lund_malmo_revised", "lund_malmo_rev", "mdrd", "schwartz", "schwartz_revised")
+    available_methods <- c(
+      "cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted",
+      "malmo_lund_revised", "malmo_lund_rev", "lund_malmo_revised", "lund_malmo_rev",
+      "mdrd", "schwartz", "schwartz_revised", "jelliffe", "jelliffe_unstable",
+      "wright")
     method <- tolower(method)
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
@@ -74,7 +86,7 @@ calc_egfr <- function (
     }
     if(is.nil(relative)) {
       relative <- TRUE # most equations report in /1.73m2
-      if(method == "cockroft_gault") {
+      if(method == "cockroft_gault") { # except CG
         relative <- FALSE
       }
     }
@@ -93,6 +105,40 @@ calc_egfr <- function (
       crcl <- c()
       unit <- unit_out
       for (i in 1:length(scr)) {
+        if(method == "wright") {
+          if(is.nil(scr[i]) || is.nil(sex) || is.nil(age) || is.nil(bsa)) {
+            stop("Wright equation requires: scr, sex, bsa (or weight and height), and age as input!")
+          }
+          if(tolower(scr_unit[i]) == "mg/dl") {
+            scr[i] <- scr[i] * 88.40
+          }
+          crcl[i] = ((6580 - (38.8 * age)) * bsa * (1-(0.168*ifelse(sex == "male", 0, 1))))/scr[i]
+        }
+        if(method == "jelliffe") {
+          if(is.nil(scr[i]) || is.nil(sex) || is.nil(age) || is.nil(bsa)) {
+            stop("Jelliffe equation requires: scr, sex, bsa (or weight and height), and age as input!")
+          }
+          if(tolower(scr_unit[i]) == "mg/dl") {
+            scr[i] <- scr[i] * 88.40
+          }
+          crcl[i] = ((98 - 0.8*(age - 20)) * (1 - 0.01 * ifelse(sex == "male", 0, 1)) * bsa/1.73) / (scr[i]*0.0113)
+        }
+        if(method == "jelliffe_unstable") {
+          ## RK: not ready yet...
+          if(is.nil(scr[i]) || is.nil(sex) || is.nil(age) || is.nil(weight)) {
+            stop("Jelliffe equation requires: scr, sex, weight, and age as input!")
+          }
+          vol <- 0.4 * weight * 10
+          ifelse(sex == "male", 0.85, 0.765)
+          corr <- 0.85
+          if(sex == "female") { corr <- 0.765 }
+          scr1 <- scr[i]
+          scr2 <- scr[i]
+          if(i > 1) { scr1 <- scr[i-1] }
+          scr_av <- mean(c(scr1,scr2))
+          cr_prod <- (29.305-(0.203*age)) * weight * (1.037-(0.0338 * scr_av)) * ifelse(sex == "male", 0.85, 0.765)
+          crcl[i] <- ((vol * (scr1 - scr2) + cr_prod) * 100) / (1440 * scr_av)
+        }
         if(method == "mdrd") {
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(race) || is.nil(age)) {
             stop("MDRD equation requires: scr, sex, race, and age as input!")

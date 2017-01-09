@@ -60,6 +60,11 @@ l <- calc_egfr(
   relative = FALSE)
 assert("multiple calc egfr malmo-lund rev", round(l$value) == c(65,73, 67,74))
 
+assert("Jelliffe",round(calc_egfr(age = 40, sex="male", bsa = 1.6, weight = 70, scr = 1, method = "jelliffe")$value == 76))
+# assert("Jelliffe for unstable patients",round(calc_egfr(age = 40, sex="male", bsa = 1.6, weight = 70, scr = 1, method = "jelliffe")$value == 76))
+assert("Wright", all(round(calc_egfr(age = 40, sex="male", weight = 80, height=170, scr = c(.5, 1, 1.5), method = "wright")$value) == c(218, 109, 73)))
+assert("Wright", all(round(calc_egfr(age = 20, sex="female", weight = 60, height=150, scr = c(.5, 1, 1.5), method = "wright")$value) == c(169, 85, 56)))
+
 ## ABW
 assert("ABW no height specified", has_error(calc_abw(weight = 80)))   # missing height / ibw
 assert("ABW no weight specified", has_error(calc_abw(weight = NULL))) # missing weight
