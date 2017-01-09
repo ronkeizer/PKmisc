@@ -7,10 +7,11 @@
 calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
   scr_unit = NULL, scr_assay = NULL, race = "other", weight = NULL,
   height = NULL, bsa = NULL, preterm = FALSE, ckd = FALSE,
-  bsa_method = "dubois", relative = NULL, unit_out = "mL/min", ...)
+  times = NULL, bsa_method = "dubois", relative = NULL,
+  unit_out = "mL/min", ...)
 }
 \arguments{
-\item{method}{eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_revised`, `schwartz`}
+\item{method}{eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`}
 
 \item{sex}{sex}
 
@@ -34,6 +35,8 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
 
 \item{ckd}{chronic kidney disease? (Schwartz equations only)}
 
+\item{times}{vector of sampling times for creatinine (only used in Jelliffe equation for unstable patients)}
+
 \item{bsa_method}{BSA estimation method, see `bsa()` for details}
 
 \item{relative}{`TRUE`/`FALSE`. Report eGFR as per 1.73 m2? Requires BSA if re-calculation required. If `NULL` (=default), will choose value typical for `method`.}
@@ -43,6 +46,14 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
 \item{...}{arguments passed on}
 }
 \description{
-Calculate the estimated glomerulal filtration rate, an estimate of renal function
+Calculate the estimated glomerulal filtration rate, an estimate of renal function using one of the following approaches:
+- Cockroft Gault (using weight, ideal body weight, or adjusted body weight)
+- Revised Lund-Malmo
+- Modification of Diet in Renal Disease study (MDRD)
+- Schwartz
+- Schwartz revised
+- Jelliffe
+- Jelliffe (for unstable renal function)
+- Wright
 }
 
