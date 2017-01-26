@@ -168,7 +168,7 @@ V <- 50
 kel <- 0.1
 CL <- kel * V
 conc <- pk_1cmt_inf_ss(t = 10, dose = 1000, tau = 12, t_inf = 1, CL = CL, V = V)
-kel_est <- calc_kel_single_trough(
+kel_est <- calc_kel_single_tdm(
   dose = 1000,
   V = 50,
   t = 5,
