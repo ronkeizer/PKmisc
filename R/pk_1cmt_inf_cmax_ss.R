@@ -9,7 +9,7 @@
 #' @param t_inf infusion time
 #' @param ruv residual variability, specified as list with optional arguments for proportional, additive, or exponential components, e.g. `list(prop=0.1, add=1, exp=0)`
 #' @export
-pk_cmt_inf_cmax_ss <- function (dose, tau, CL, V, t_inf, ruv = NULL) {
+pk_1cmt_inf_cmax_ss <- function (dose, tau, CL, V, t_inf, ruv = NULL) {
   tmp <- (dose / (CL * t_inf)) * ( (1-exp(-(CL/V)*t_inf)) / (1-exp(-(CL/V)*tau)) )
   if(!is.null(ruv)) {
     tmp <- add_ruv (tmp, ruv)

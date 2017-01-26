@@ -162,6 +162,24 @@ assert("PK 1cmt infusion dose calculation",
        round(pk_1cmt_inf_dose_from_cmax(cmax = 10, tau = 24, t_inf = 1,
                                         CL = 10, V = 50),1) == 547.1)
 
+## Kel estimation
+dose <- 1000
+V <- 50
+kel <- 0.1
+CL <- kel * V
+conc <- pk_1cmt_inf_ss(t = 10, dose = 1000, tau = 12, t_inf = 1, CL = CL, V = V)
+kel_est <- calc_kel_single_trough(
+  dose = 1000,
+  V = 50,
+  t = 5,
+  dv = 18.25669,
+  tau = 12,
+  t_inf = 1,
+  kel_init = .25,
+  n_iter = 100
+)
+assert("estimation of elimination rate", abs(kel_est - kel)/kel < 0.05)
+
 ## auc2dose
 assert("auc2dose empty call", has_error(auc2dose()))
 assert("auc2dose ", auc2dose(auc = 500, CL=10, V=100) == 5000)

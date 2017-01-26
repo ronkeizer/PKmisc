@@ -64,7 +64,11 @@ Functions to simulate concentrations for linear PK models.
 | `pk_2cmt_bolus_cmin_ss()` | 2 | bolus | steady state | Cmin |
 | `pk_2cmt_bolus_cmax_ss()` | 2 | bolus | steady state | Cmax |
 
-## Dose calculations
+## TDM equations
+
+- `calc_kel_single_tdm()`: calculate elimination rate (for linear 1-cmt model) based on single TDM sample and provided volume of distribution.
+
+## Dose / TDM calculations
 
 Functions to calculate the dose expected to achieve a specific target exposure.
 
