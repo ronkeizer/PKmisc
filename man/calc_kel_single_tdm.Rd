@@ -25,6 +25,6 @@ calc_kel_single_tdm(dose = 1000, V = 50, t = 10, dv = 10, tau = 12,
 \item{n_iter}{number of iterations to improve estimate of elimination rate}
 }
 \description{
-Calculate elimination rate when given a single TDM sample
+Using iterative k_el calculation, and based on given Volume
 }
 

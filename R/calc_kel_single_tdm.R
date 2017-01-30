@@ -1,5 +1,7 @@
 #' Calculate elimination rate when given a single TDM sample
 #'
+#' Using iterative k_el calculation, and based on given Volume
+#'
 #' @param dose dose amount
 #' @param V volume of distribution
 #' @param t time or time after dose
@@ -25,12 +27,10 @@ calc_kel_single_tdm <- function (
     cpeak <- PKmisc::pk_1cmt_inf_cmax_ss(
       dose = dose, CL = kel * V, V = V, tau = tau, t_inf = t_inf
     )
-    ## safeguard, iterate with reduced step size
-    kel_tmp <- log(cpeak/dv) / (t %% tau - t_inf)
-    ratio <- abs(kel_tmp - kel) / kel
-    if(ratio > 0.25) {
-      kel <- (kel + kel_tmp) / 2
-    }
+    cpred <- PKmisc::pk_1cmt_inf_ss(
+      t = t,
+      dose = dose, CL = kel * V, V = V, tau = tau, t_inf = t_inf)
+    kel <- (cpred$dv/dv) * kel
   }
   return(kel)
 }
