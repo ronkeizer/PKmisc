@@ -236,8 +236,13 @@ calc_egfr <- function (
           if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
             scr[i] <- scr[i] / 88.40
           }
+          if(method == "schwartz") {
+            scr[i] <- convert_creat_assay(scr[i], from = scr_assay, to = "jaffe")
+          }
           if(method == "schwartz_revised") {
             scr[i] <- convert_creat_assay(scr[i], from = scr_assay, to = "idms")
+          }
+          if(method == "schwartz_revised") {
             k <- 0.413
           } else {
             k <- 0.55
