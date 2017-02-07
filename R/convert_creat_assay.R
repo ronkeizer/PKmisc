@@ -11,6 +11,11 @@ convert_creat_assay <- function(
   from = "idms",
   to = "jaffe") {
 
+  if(is.null(from) || is.null(to) || any(is.null(scr))) {
+    warning("Can't convert creatinine values, some value is NULL. Returning untransformed values.")
+    return(scr)
+  }
+
   ## first convert everything to jaffe
   if (tolower(from) %in% c("enzymatic", "enzym")) {  # default is Jaffe method
      scr <- (scr + 0.112) / 1.05
