@@ -51,7 +51,6 @@ Functions to simulate concentrations for linear PK models.
 | `pk_1cmt_inf_ss()` | 1 | infusion | steady state | concentration table |
 | `pk_1cmt_inf_cmin_ss()` | 1 | infusion | steady state | Cmin |
 | `pk_1cmt_inf_cmax_ss()` | 1 | infusion | steady state | Cmax |
-| `pk_1cmt_t12()` | 1 | - | - | half-life |
 | `pk_2cmt_inf()` | 2 | infusion | single/multi dose | concentration table |
 | `pk_2cmt_inf_ss()` | 2 | infusion | steady state | concentration table |
 | `pk_2cmt_inf_cmin_ss()` | 2 | infusion | steady state | Cmin |
@@ -60,6 +59,7 @@ Functions to simulate concentrations for linear PK models.
 | `pk_1cmt_bolus_ss()` | 1 | bolus | steady state | concentration table |
 | `pk_1cmt_bolus_cmin_ss()` | 1 | bolus | steady state | Cmin |
 | `pk_1cmt_bolus_cmax_ss()` | 1 | bolus | steady state | Cmax |
+| `pk_1cmt_t12()` | 1 | - | - | half-life |
 | `pk_2cmt_bolus()` | 2 | bolus | single/multi dose | concentration table |
 | `pk_2cmt_bolus_ss()` | 2 | bolus | steady state | concentration table |
 | `pk_2cmt_bolus_cmin_ss()` | 2 | bolus | steady state | Cmin |
