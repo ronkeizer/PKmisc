@@ -11,6 +11,7 @@ convert_creat_assay <- function(
   from = "idms",
   to = "jaffe") {
 
+  scr_orig <- scr
   if(is.null(from) || is.null(to) || any(is.null(scr))) {
     warning("Can't convert creatinine values, some value is NULL. Returning untransformed values.")
     return(scr)
@@ -31,5 +32,10 @@ convert_creat_assay <- function(
   if (tolower(to) %in% c("enzymatic_idms", "idms")) {
     scr <- (scr * 1.027) - 0.254
   }
-  return(scr)
+  if(scr >= 0.1) {
+    return(scr)
+  } else {
+    warning(paste0("Couldn't reliably convert creatinine value between assays, return original value (", from, ")."))
+    return(scr_orig)
+  }
 }
