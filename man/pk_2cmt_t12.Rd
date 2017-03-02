@@ -4,7 +4,7 @@
 \alias{pk_2cmt_t12}
 \title{Calculate terminal half-life for 2-compartment model}
 \usage{
-pk_2cmt_t12(CL = 3, V = 30, Q = 2, V2 = 20, phase = "beta")
+pk_2cmt_t12(CL = 3, V = 30, Q = 2, V2 = 20, phase = "both")
 }
 \arguments{
 \item{CL}{clearance}
@@ -15,7 +15,7 @@ pk_2cmt_t12(CL = 3, V = 30, Q = 2, V2 = 20, phase = "beta")
 
 \item{V2}{volume of peripheral compartment}
 
-\item{phase}{`alpha` or `beta` (default) to indicate initial (distribution) or terminal (elimination) phase.}
+\item{phase}{`alpha`, `beta` (default) or `both` to indicate initial (distribution) or terminal (elimination) phase.}
 }
 \description{
 Calculate terminal half-life for 2-compartment model
