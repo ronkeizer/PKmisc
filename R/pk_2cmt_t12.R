@@ -1,4 +1,4 @@
-#' Calculate terminal half-life for 2-compartment model
+#' Calculate half-life(s) for 2-compartment model
 #'
 #' @param CL clearance
 #' @param V volume of central compartment

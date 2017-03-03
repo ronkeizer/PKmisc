@@ -2,7 +2,7 @@
 % Please edit documentation in R/pk_2cmt_t12.R
 \name{pk_2cmt_t12}
 \alias{pk_2cmt_t12}
-\title{Calculate terminal half-life for 2-compartment model}
+\title{Calculate half-life(s) for 2-compartment model}
 \usage{
 pk_2cmt_t12(CL = 3, V = 30, Q = 2, V2 = 20, phase = "both")
 }
@@ -18,6 +18,6 @@ pk_2cmt_t12(CL = 3, V = 30, Q = 2, V2 = 20, phase = "both")
 \item{phase}{`alpha`, `beta` (default) or `both` to indicate initial (distribution) or terminal (elimination) phase.}
 }
 \description{
-Calculate terminal half-life for 2-compartment model
+Calculate half-life(s) for 2-compartment model
 }
 
