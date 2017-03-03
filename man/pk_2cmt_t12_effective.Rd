@@ -5,7 +5,7 @@
 \title{Calculate effective half-life for 2-compartment model}
 \usage{
 pk_2cmt_t12_effective(CL = 3, V = 30, Q = 2, V2 = 20, tau = 12,
-  t_inf = NULL, steady_state = TRUE)
+  t_inf = NULL)
 }
 \arguments{
 \item{CL}{clearance}
@@ -19,8 +19,6 @@ pk_2cmt_t12_effective(CL = 3, V = 30, Q = 2, V2 = 20, tau = 12,
 \item{tau}{interval (hours)}
 
 \item{t_inf}{infusion time (hours)}
-
-\item{steady_state}{at steady state, or no?}
 }
 \description{
 With "effective half-life" it is meant the average half-life within a specific interval

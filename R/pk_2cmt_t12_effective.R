@@ -8,7 +8,6 @@
 #' @param V2 volume of peripheral compartment
 #' @param tau interval (hours)
 #' @param t_inf infusion time (hours)
-#' @param steady_state at steady state, or no?
 #' @export
 pk_2cmt_t12_effective <- function(
   CL = 3,
@@ -16,8 +15,7 @@ pk_2cmt_t12_effective <- function(
   Q = 2,
   V2 = 20,
   tau = 12,
-  t_inf = NULL,
-  steady_state = TRUE
+  t_inf = NULL
 ) {
   ## conversions, if necessary
   if(class(CL) == "list" && !is.null(CL$value)) { CL <- CL$value }
