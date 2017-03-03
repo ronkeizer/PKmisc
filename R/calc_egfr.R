@@ -10,7 +10,7 @@
 #' - Jelliffe (for unstable renal function)
 #' - Wright
 #'
-#' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`
+#' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `ckd_epi`, malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`
 #' @param sex sex
 #' @param age age
 #' @param scr serum creatinine (mg/dL)
@@ -50,9 +50,9 @@ calc_egfr <- function (
     available_methods <- c(
       "cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted",
       "malmo_lund_revised", "malmo_lund_rev", "lund_malmo_revised", "lund_malmo_rev",
-      "mdrd", "schwartz", "schwartz_revised", "jelliffe", "jelliffe_unstable",
+      "mdrd", "ckd_epi", "schwartz", "schwartz_revised", "jelliffe", "jelliffe_unstable",
       "wright")
-    method <- tolower(method)
+    method <- gsub("-", "_", tolower(method))
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
     }
@@ -166,6 +166,29 @@ calc_egfr <- function (
           if (sex == "female") { f_sex <- 0.762 }
           if (race == "black") { f_race <- 1.210 }
           crcl[i] <- 186 * scr[i]^(-1.154) * f_sex * f_race * age^(-0.203)
+          if(!relative) {
+            if(is.nil(bsa)) {
+              stop("Error: bsa not specified, or weight and height not specified! Can't convert between absolute and relative eGFR!")
+            } else {
+              crcl[i] <- crcl[i] * (bsa/1.73)
+              unit <- unit
+            }
+          } else {
+            unit <- paste0(unit_out, "/1.73m^2")
+          }
+        }
+        if(method == "ckd_epi") {
+          if(is.nil(scr[i]) || is.nil(sex) || is.nil(race) || is.nil(age)) {
+            stop("MDRD equation requires: scr, sex, race, and age as input!")
+          }
+          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+            scr[i] <- scr[i] / 88.40
+          }
+          f_sex <- 1
+          f_race <- 1
+          if (sex == "female") { f_sex <- 1.018 }
+          if (race == "black") { f_race <- 1.159 }
+          crcl[i] <- 141 * min(scr[i], 1)^(-0.329) * max(scr[i], 1)^(-1.209) * 0.993^age * f_sex * f_race
           if(!relative) {
             if(is.nil(bsa)) {
               stop("Error: bsa not specified, or weight and height not specified! Can't convert between absolute and relative eGFR!")

@@ -25,7 +25,7 @@ Miscellaneous functions
 
 ## Clinical chemistry
 
-- `calc_egfr()`: eGFR calculation using various equations (Cockroft-Gault, MDRD, Jelliffe, Jelliffe for unstable patients, Wright, Lund-Malmo revised, Schwartz, Schwartz revised)
+- `calc_egfr()`: eGFR calculation using various equations (Cockroft-Gault, MDRD, CKD-EPI, Jelliffe, Jelliffe for unstable patients, Wright, Lund-Malmo revised, Schwartz, Schwartz revised)
 - `calc_creat()`: mean serum creatinine for children and adults (given age and sex)
 - `calc_creat_neo()`: typical serum creatinine for neonates given post-natal age
 - `convert_creat_assay()`: convert between various creatinine assays (Jaffe, IDMS, etc)

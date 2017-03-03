@@ -33,6 +33,9 @@ assert("Cockroft-gault ibw", round(calc_egfr(age = 50, sex="male", weight = 150,
 assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_adjusted", relative = FALSE, factor = 0.3)$value) == 135)
 assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_ideal", relative = FALSE)$value) == 104)
 
+assert("CKD-EPI", round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "ckd-epi", race="black")$value) == 123)
+assert("MDRD", round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, race = "black", method="mdrd")$value) == 106)
+
 err2 <- try(expr = { calc_egfr(age = 40, weight = 80, scr = 1, method = "malmo_lund_revised", relative = FALSE) }, silent=TRUE)
 assert("Malmo-Lund error", class(err2[1]) == "character") # error message when no weight specified
 assert("Malmo-Lund revised",
