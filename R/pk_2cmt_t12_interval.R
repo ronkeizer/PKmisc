@@ -1,6 +1,4 @@
-#' Calculate effective half-life for 2-compartment model
-#'
-#' With "effective half-life" it is meant the average half-life within a specific interval
+#' Calculate average half-life for 2-compartment model during a specific interval
 #'
 #' @param CL clearance
 #' @param V volume of central compartment
@@ -9,7 +7,7 @@
 #' @param tau interval (hours)
 #' @param t_inf infusion time (hours)
 #' @export
-pk_2cmt_t12_effective <- function(
+pk_2cmt_t12_interval <- function(
   CL = 3,
   V = 30,
   Q = 2,
@@ -27,5 +25,5 @@ pk_2cmt_t12_effective <- function(
   } else {
     conc <- pk_2cmt_bolus_ss(t=c(0, tau), dose = 1000, tau = tau, CL=CL, V=V, Q=Q, V2=V2)
   }
-  calc_t12_effective(conc$t[1], conc$t[2], conc$dv[1], conc$dv[2])
+  calc_t12(conc$t[1], conc$t[2], conc$dv[1], conc$dv[2])
 }

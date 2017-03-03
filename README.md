@@ -65,7 +65,7 @@ Functions to simulate concentrations for linear PK models.
 | `pk_2cmt_bolus_cmin_ss()` | 2 | bolus | steady state | Cmin |
 | `pk_2cmt_bolus_cmax_ss()` | 2 | bolus | steady state | Cmax |
 | `pk_2cmt_t12()` | 2 | - | - | terminal half-life |
-| `pk_2cmt_t12_effective()` | 2 | - | - | effective half-life in given interval |
+| `pk_2cmt_t12_interval()` | 2 | - | - | effective half-life in given interval |
 
 ## Dose / TDM calculations
 
@@ -87,5 +87,5 @@ Functions to calculate the dose expected to achieve a specific target exposure.
 ## Miscellaneous equations
 
 - `calc_kel_single_tdm()`: calculate elimination rate (for linear 1-cmt model) based on single TDM sample and provided volume of distribution.
-- `calc_t12_effective()`: calculate effective half-life based on two TDM points.
+- `calc_t12()`: calculate effective half-life based on two TDM points.
 
