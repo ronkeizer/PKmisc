@@ -56,6 +56,12 @@ calc_egfr <- function (
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
     }
+    if(!is.null(scr_unit)) {
+      scr_units_allowed <- c("mg/dl", "micromol/l", "mumol/l")
+      if(!all(tolower(scr_unit) %in% scr_units_allowed)) {
+        stop("Sorry, specified serum Cr unit not recognized!")
+      }
+    }
     if(method == "cockroft_gault_ideal") {
       if(is.nil(height) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
         stop("Cockroft-Gault using ideal body weight requires: scr, sex, weight, height, and age as input!")
@@ -128,6 +134,9 @@ calc_egfr <- function (
         if(method == "jelliffe_unstable") {
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(age) || is.nil(weight)) {
             stop("Jelliffe equation requires: scr, sex, weight, and age as input!")
+          }
+          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+            scr[i] <- scr[i] / 88.40
           }
           vol <- 0.4 * weight * 10
           ifelse(sex == "male", 0.85, 0.765)
