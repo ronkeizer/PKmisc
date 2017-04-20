@@ -4,10 +4,11 @@
 # PKmisc
 Miscellaneous equations and tools for clinical pharmacokinetics
 
-## Tools
-Miscellaneous functions
+## Miscellaneous functions
 
 - `nca()`: Non-compartmental PK analysis, e.g. AUC, half-life, etc.
+- `calc_kel_single_tdm()`: calculate elimination rate (for linear 1-cmt model) based on single TDM sample and provided volume of distribution.
+- `calc_t12()`: calculate effective half-life based on two TDM points.
 - `find_nearest_dose()`: Find nearest available dose based on smallest available dosing unit
 - `find_nearest_interval()`: Find nearest (or nearest higher / nearest lower) dosing interval 
 
@@ -84,9 +85,4 @@ Functions to calculate the dose expected to achieve a specific target exposure.
 | `pk_2cmt_bolus_dose_for_cmax()` | 2 | bolus | cmax | dose |
 | `dose2auc()` | 1 | - | auc | auc |
 | `auc2dose()` | 1 | - | auc | dose |
-
-## Miscellaneous equations
-
-- `calc_kel_single_tdm()`: calculate elimination rate (for linear 1-cmt model) based on single TDM sample and provided volume of distribution.
-- `calc_t12()`: calculate effective half-life based on two TDM points.
 
