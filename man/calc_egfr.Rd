@@ -46,7 +46,7 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
 \item{...}{arguments passed on}
 }
 \description{
-Calculate the estimated glomerulal filtration rate, an estimate of renal function using one of the following approaches:
+Calculate the estimated glomerulal filtration rate (an estimate of renal function) based on measured serum creatinine using one of the following approaches:
 - Cockroft Gault (using weight, ideal body weight, or adjusted body weight)
 - Revised Lund-Malmo
 - Modification of Diet in Renal Disease study (MDRD)
@@ -55,5 +55,8 @@ Calculate the estimated glomerulal filtration rate, an estimate of renal functio
 - Jelliffe
 - Jelliffe (for unstable renal function)
 - Wright
+}
+\details{
+Equations for estimation of eGFR from Cystatin C concentrations are available from the `calc_egfr_cystatin()` function.
 }
 

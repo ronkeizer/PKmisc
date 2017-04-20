@@ -1,6 +1,6 @@
 #' Calculate eGFR
 #'
-#' Calculate the estimated glomerulal filtration rate, an estimate of renal function using one of the following approaches:
+#' Calculate the estimated glomerulal filtration rate (an estimate of renal function) based on measured serum creatinine using one of the following approaches:
 #' - Cockroft Gault (using weight, ideal body weight, or adjusted body weight)
 #' - Revised Lund-Malmo
 #' - Modification of Diet in Renal Disease study (MDRD)
@@ -9,6 +9,8 @@
 #' - Jelliffe
 #' - Jelliffe (for unstable renal function)
 #' - Wright
+#'
+#' Equations for estimation of eGFR from Cystatin C concentrations are available from the `calc_egfr_cystatin()` function.
 #'
 #' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `ckd_epi`, malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`
 #' @param sex sex
@@ -304,17 +306,16 @@ calc_egfr <- function (
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
-        if (length(grep("l/hr", tolower(unit_out))) > 0) {
+        if (length(grep("^l/hr", tolower(unit_out))) > 0) {
           crcl[i] <- crcl[i] * 60 / 1000
         }
-        if (length(grep("ml/hr", tolower(unit_out))) > 0) {
+        if (length(grep("^ml/hr", tolower(unit_out))) > 0) {
           crcl[i] <- crcl[i] * 60
         }
       }
       return(list(
         value = crcl,
-        unit = unit,
-        bsa = bsa
+        unit = unit
       ))
     } else {
       return(FALSE)
