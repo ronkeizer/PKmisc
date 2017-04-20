@@ -4,7 +4,7 @@
 \alias{pct_bmi_for_age}
 \title{Percentile BMI for age for children}
 \usage{
-pct_bmi_for_age(age = NULL, bmi = NULL, sex = NULL, ...)
+pct_bmi_for_age(age = NULL, bmi = NULL, sex = NULL, height = NULL, ...)
 }
 \arguments{
 \item{age}{age in years}
@@ -12,6 +12,8 @@ pct_bmi_for_age(age = NULL, bmi = NULL, sex = NULL, ...)
 \item{bmi}{bmi Optional, if specified, will calculate closest percentile and return in list as `percentile`}
 
 \item{sex}{either `male` or `female`}
+
+\item{height}{height}
 
 \item{...}{parameters passed to `read_who_table()`}
 }

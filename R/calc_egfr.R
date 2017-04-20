@@ -59,7 +59,7 @@ calc_egfr <- function (
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
     }
     if(!is.null(scr_unit)) {
-      scr_units_allowed <- c("mg/dl", "micromol/l", "mumol/l")
+      scr_units_allowed <- c("mg/dl", "micromol/l", "mumol/l", "umol/l")
       if(!all(tolower(scr_unit) %in% scr_units_allowed)) {
         stop("Sorry, specified serum Cr unit not recognized!")
       }
@@ -137,7 +137,7 @@ calc_egfr <- function (
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(age) || is.nil(weight)) {
             stop("Jelliffe equation requires: scr, sex, weight, and age as input!")
           }
-          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+          if(tolower(scr_unit[i]) %in% c("umol/l", "mumol/l", "micromol/l")) {
             scr[i] <- scr[i] / 88.40
           }
           vol <- 0.4 * weight * 10
@@ -169,7 +169,7 @@ calc_egfr <- function (
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(race) || is.nil(age)) {
             stop("MDRD equation requires: scr, sex, race, and age as input!")
           }
-          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+          if(tolower(scr_unit[i]) %in% c("umol/l", "mumol/l", "micromol/l")) {
             scr[i] <- scr[i] / 88.40
           }
           f_sex <- 1
@@ -192,7 +192,7 @@ calc_egfr <- function (
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(race) || is.nil(age)) {
             stop("MDRD equation requires: scr, sex, race, and age as input!")
           }
-          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+          if(tolower(scr_unit[i]) %in% c("umol/l", "mumol/l", "micromol/l")) {
             scr[i] <- scr[i] / 88.40
           }
           f_sex <- 1
@@ -215,7 +215,7 @@ calc_egfr <- function (
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
             stop("Cockroft-Gault equation requires: scr, sex, weight, and age as input!")
           }
-          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+          if(tolower(scr_unit[i]) %in% c("umol/l", "mumol/l", "micromol/l")) {
             scr[i] <- scr[i] / 88.40
           }
           f_sex <- 1
@@ -267,7 +267,7 @@ calc_egfr <- function (
           if(is.nil(scr[i]) || is.nil(age) || is.nil(sex) || is.nil(height) || is.nil(preterm)) {
             stop("Schwartz equation requires: scr, sex, height, preterm, and age as input!")
           }
-          if(tolower(scr_unit[i]) == "umol/l" || tolower(scr_unit[i]) == "micromol/l") {
+          if(tolower(scr_unit[i]) %in% c("umol/l", "mumol/l", "micromol/l")) {
             scr[i] <- scr[i] / 88.40
           }
           if(method == "schwartz") {

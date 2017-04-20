@@ -3,6 +3,7 @@
 #' @param method eGFR estimation method, choose from `grubb`, `larsson`
 #' @param cystatin serum cystatin concentration (mg/L)
 #' @param cystatin_unit, only `mg/L` available
+#' @param unit_out eGFR output unit, choose from `ml/min`, `ml/hr`, `l/min`, `l/hr`
 #' @export
 calc_egfr_cystatin <- function (
   cystatin = NULL,

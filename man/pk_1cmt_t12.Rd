@@ -4,7 +4,7 @@
 \alias{pk_1cmt_t12}
 \title{Calculate terminal half-life for 1-compartment model}
 \usage{
-pk_1cmt_t12(CL = 3, V = 30, Q = 2, V2 = 20)
+pk_1cmt_t12(CL = 3, V = 30)
 }
 \arguments{
 \item{CL}{clearance}
