@@ -27,4 +27,3 @@ pk_2cmt_bolus_ss(t = c(0:24), dose = 100, tau = 12, CL = 3, V = 30,
 \description{
 Concentration predictions for 2-compartmental PK model, bolus dosing at steady state
 }
-

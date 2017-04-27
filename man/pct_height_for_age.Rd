@@ -18,4 +18,3 @@ pct_height_for_age(age = NULL, height = NULL, sex = NULL, ...)
 \description{
 Based on tables from WHO: http://www.who.int/childgrowth/standards/height_for_age/en/
 }
-

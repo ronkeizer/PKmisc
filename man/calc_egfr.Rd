@@ -59,4 +59,3 @@ Calculate the estimated glomerulal filtration rate (an estimate of renal functio
 \details{
 Equations for estimation of eGFR from Cystatin C concentrations are available from the `calc_egfr_cystatin()` function.
 }
-

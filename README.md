@@ -9,6 +9,7 @@ Miscellaneous equations and tools for clinical pharmacokinetics
 - `nca()`: Non-compartmental PK analysis, e.g. AUC, half-life, etc.
 - `calc_kel_single_tdm()`: calculate elimination rate (for linear 1-cmt model) based on single TDM sample and provided volume of distribution.
 - `calc_t12()`: calculate effective half-life based on two TDM points.
+- `calc_amts_for_conc()`: Calculate the amounts in all compartments in a compartmental PK system based on a given concentration in the central compartment, and assuming steady state.
 - `find_nearest_dose()`: Find nearest available dose based on smallest available dosing unit
 - `find_nearest_interval()`: Find nearest (or nearest higher / nearest lower) dosing interval 
 

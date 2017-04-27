@@ -20,4 +20,3 @@ pct_bmi_for_age(age = NULL, bmi = NULL, sex = NULL, height = NULL, ...)
 \description{
 Based on tables from WHO: http://www.who.int/growthref/who2007_bmi_for_age/en/
 }
-

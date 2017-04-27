@@ -25,4 +25,3 @@ pk_1cmt_inf(t = c(0:24), dose = 100, tau = 12, t_inf = 2, CL = 3,
 \description{
 Concentration predictions for 1-compartmental PK model after single or multiple bolus doses
 }
-

@@ -20,4 +20,3 @@ pk_1cmt_bolus_dose_from_cmin(cmin = 1, tau = 12, CL = 3, V = 30)
 Calculate dose to achieve steady state trough
 for 1-compartmental PK model bolus dosing at steady state
 }
-

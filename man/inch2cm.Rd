@@ -12,4 +12,3 @@ inch2cm(inch)
 \description{
 Convert inch to cm
 }
-

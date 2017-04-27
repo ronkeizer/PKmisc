@@ -27,4 +27,3 @@ pk_2cmt_inf_dose_from_cmin(cmin = 1, tau = 12, t_inf = 1, CL = 3,
 Calculate dose to achieve steady state trough
 for 2-compartmental PK model with infusion dosing at steady state
 }
-

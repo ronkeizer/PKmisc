@@ -14,4 +14,3 @@ weight2kg(value = NULL, unit = NULL)
 \description{
 Convert any weight unit to kg
 }
-

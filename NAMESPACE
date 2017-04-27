@@ -3,6 +3,7 @@
 export(add_ruv)
 export(auc2dose)
 export(calc_abw)
+export(calc_amts_for_conc)
 export(calc_bmi)
 export(calc_bsa)
 export(calc_creat)

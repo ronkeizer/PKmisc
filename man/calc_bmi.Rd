@@ -14,4 +14,3 @@ calc_bmi(weight, height)
 \description{
 Calculate BMI
 }
-

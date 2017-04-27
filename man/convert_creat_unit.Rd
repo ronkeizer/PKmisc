@@ -14,4 +14,3 @@ convert_creat_unit(value = NULL, unit_in = "mg/dL")
 \description{
 Convert creatinine to different unit
 }
-

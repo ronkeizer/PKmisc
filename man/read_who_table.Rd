@@ -22,4 +22,3 @@ read_who_table(sex = NULL, age = NULL, type = "wfa",
 \description{
 Internal function to read WHO growth tables from package or download from WHO
 }
-

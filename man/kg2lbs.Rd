@@ -12,4 +12,3 @@ kg2lbs(kg)
 \description{
 Convert kg to lbs
 }
-

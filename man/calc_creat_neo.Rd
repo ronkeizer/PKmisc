@@ -19,4 +19,3 @@ Uses equations described in Germovsek E et al. (http://www.ncbi.nlm.nih.gov/pubm
 based on data from Cuzzolin et al. (http://www.ncbi.nlm.nih.gov/pubmed/16773403) and
 Rudd et al. (http://www.ncbi.nlm.nih.gov/pubmed/6838252)
 }
-

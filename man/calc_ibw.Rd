@@ -48,4 +48,3 @@ _ 18 years old (Devine equation)
 \description{
 Get an estimate of ideal body weight. This function allows several commonly used equations
 }
-

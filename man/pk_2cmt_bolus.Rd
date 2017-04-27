@@ -27,4 +27,3 @@ pk_2cmt_bolus(t = c(0:24), dose = 100, tau = 12, CL = 3, V = 30,
 \description{
 Concentration predictions for 1-compartmental PK model, single or multiple bolus doses
 }
-

@@ -25,4 +25,3 @@ pk_2cmt_bolus_cmin_ss(dose = 100, tau = 12, CL = 3, V = 30, Q = 2,
 \description{
 Cmin (trough) for 2-compartmental PK model, bolus dosing at steady state
 }
-

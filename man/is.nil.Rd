@@ -12,4 +12,3 @@ is.nil(x)
 \description{
 Check if values in vector are empty
 }
-

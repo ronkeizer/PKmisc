@@ -14,4 +14,3 @@ pk_1cmt_t12(CL = 3, V = 30)
 \description{
 Calculate terminal half-life for 1-compartment model
 }
-

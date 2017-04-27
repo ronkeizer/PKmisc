@@ -29,4 +29,3 @@ pk_2cmt_inf(t = c(0:24), dose = 100, tau = 12, t_inf = 1, CL = 3,
 \description{
 Concentration predictions for 1-compartmental PK model, single or multiple infusions
 }
-

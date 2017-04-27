@@ -12,4 +12,3 @@ as.num(x)
 \description{
 factors or characters to numeric
 }
-

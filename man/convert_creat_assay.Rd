@@ -16,4 +16,3 @@ convert_creat_assay(scr, from = "idms", to = "jaffe")
 \description{
 Based on equations as reported in Srivastava et al. 2009 (Pediatr Res. 2009 Jan;65(1):113-6. doi: 10.1203/PDR.0b013e318189a6e8)
 }
-

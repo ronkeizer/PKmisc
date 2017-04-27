@@ -19,4 +19,3 @@ mol2conc(mol = NULL, unit_mol = NULL, unit_conc = NULL,
 \description{
 Convert molar to concentration
 }
-

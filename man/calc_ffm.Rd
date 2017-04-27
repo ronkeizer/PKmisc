@@ -31,4 +31,3 @@ References:
 `al-sallami`: Al-Sallami et al. Clin Pharmacokinet 2015
 `storset`: Storset E et al. TDM 2016
 }
-

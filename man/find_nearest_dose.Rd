@@ -16,4 +16,3 @@ find_nearest_dose(dose = NULL, increment = 250, type = "round")
 \description{
 Generic function to calculate the dose nearest to a specific dose unit increment
 }
-

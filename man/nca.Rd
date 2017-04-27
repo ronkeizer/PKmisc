@@ -23,4 +23,3 @@ nca(data = NULL, dose = 100, tau = 6, method = "log_linear",
 \description{
 Perform an NCA based on a NONMEM-style dataset
 }
-

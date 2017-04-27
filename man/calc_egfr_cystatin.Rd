@@ -19,4 +19,3 @@ calc_egfr_cystatin(cystatin = NULL, cystatin_unit = "mg/L",
 \description{
 Calculate eGFR based on Cystatin C measurements
 }
-

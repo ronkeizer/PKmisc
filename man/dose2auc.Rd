@@ -18,4 +18,3 @@ dose2auc(dose, CL, V, t_auc = NA)
 \description{
 Convert dose to expected AUCtau or AUCt for 1 compartment linear PK model
 }
-

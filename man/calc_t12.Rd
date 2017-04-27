@@ -18,4 +18,3 @@ calc_t12(t1, t2, y1, y2)
 \description{
 based on two sampling points (in same interval)
 }
-

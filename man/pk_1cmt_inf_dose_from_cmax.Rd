@@ -23,4 +23,3 @@ pk_1cmt_inf_dose_from_cmax(cmax = 1, tau = 12, t_inf = 1, CL = 3,
 Calculate dose to achieve steady state Cmax
 for 1-compartmental PK model with infusion dosing at steady state
 }
-
