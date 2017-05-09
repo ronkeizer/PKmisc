@@ -1,8 +1,9 @@
-[![Build Status](https://travis-ci.org/ronkeizer/PKmisc.svg?branch=master)](https://travis-ci.org/ronkeizer/PKmisc)
-[![codecov](https://codecov.io/gh/ronkeizer/PKmisc/branch/master/graph/badge.svg)](https://codecov.io/gh/ronkeizer/PKmisc)
+[![Build Status](https://travis-ci.org/ronkeizer/clinPK.svg?branch=master)](https://travis-ci.org/ronkeizer/clinPK)
+[![codecov](https://codecov.io/gh/ronkeizer/clinPK/branch/master/graph/badge.svg)](https://codecov.io/gh/ronkeizer/clinPK)
 
-# PKmisc
-Miscellaneous equations and tools for clinical pharmacokinetics
+# clinPK
+
+Equations and tools for clinical pharmacokinetics
 
 ## Miscellaneous functions
 
@@ -27,7 +28,7 @@ Miscellaneous equations and tools for clinical pharmacokinetics
 
 ## Clinical chemistry
 
-- `calc_egfr()`: eGFR calculation from serum creatinine using various equations (Cockroft-Gault, MDRD, CKD-EPI, Jelliffe, Jelliffe for unstable patients, Wright, Lund-Malmo revised, Schwartz, Schwartz revised)
+- `calc_egfr()`: eGFR calculation from serum creatinine using various equations (Cockcroft-Gault, MDRD, CKD-EPI, Jelliffe, Jelliffe for unstable patients, Wright, Lund-Malmo revised, Schwartz, Schwartz revised)
 - `calc_egfr_cystatin()`: eGFR calculation from Cystatin C concentrations using various equations (Grubb, Larsson)
 - `calc_creat()`: mean serum creatinine for children and adults (given age and sex)
 - `calc_creat_neo()`: typical serum creatinine for neonates given post-natal age

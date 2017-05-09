@@ -1,4 +1,4 @@
-library(PKmisc)
+library(clinPK)
 library(testit)
 
 ## NCA
@@ -24,14 +24,14 @@ assert("BSA",
        round(calc_bsa(80, 180)$value,2) == 2.00)
 
 ## eGFR
-err1 <- try(expr = { calc_egfr(scr = .5, weight = 4.5, method = "cockroft_gault") }, silent=TRUE)
-assert("Cockroft-gault error", class(err1[1]) == "character") # error message when no weight specified
-assert("Cockroft-gault", round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockroft_gault")$value) == 111)
-assert("Cockroft-gault", round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, method = "cockroft_gault", relative = TRUE)$value) == 96)
+err1 <- try(expr = { calc_egfr(scr = .5, weight = 4.5, method = "cockcroft_gault") }, silent=TRUE)
+assert("cockcroft-gault error", class(err1[1]) == "character") # error message when no weight specified
+assert("cockcroft-gault", round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "cockcroft_gault")$value) == 111)
+assert("cockcroft-gault", round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, method = "cockcroft_gault", relative = TRUE)$value) == 96)
 
-assert("Cockroft-gault ibw", round(calc_egfr(age = 50, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_adjusted",relative = FALSE)$value) == 131)
-assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_adjusted", relative = FALSE, factor = 0.3)$value) == 135)
-assert("Cockroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockroft_gault_ideal", relative = FALSE)$value) == 104)
+assert("cockcroft-gault ibw", round(calc_egfr(age = 50, sex="male", weight = 150, height = 180, scr = 1, method = "cockcroft_gault_adjusted",relative = FALSE)$value) == 131)
+assert("cockcroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockcroft_gault_adjusted", relative = FALSE, factor = 0.3)$value) == 135)
+assert("cockcroft-gault abw", round(calc_egfr(age = 40, sex="male", weight = 150, height = 180, scr = 1, method = "cockcroft_gault_ideal", relative = FALSE)$value) == 104)
 
 assert("CKD-EPI", round(calc_egfr(age = 40, sex="male", weight = 80, scr = 1, method = "ckd-epi", race="black")$value) == 123)
 assert("MDRD", round(calc_egfr(age = 40, sex="male", weight = 80, height=180, scr = 1, race = "black", method="mdrd")$value) == 106)

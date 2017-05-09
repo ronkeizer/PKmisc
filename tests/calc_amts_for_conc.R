@@ -1,4 +1,4 @@
-library(PKmisc)
+library(clinPK)
 library(testit)
 
 A1 <- calc_amts_for_conc(10, parameters = list(CL = 10, V = 50), n_cmt = 1)

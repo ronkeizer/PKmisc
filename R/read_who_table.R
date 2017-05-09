@@ -32,7 +32,7 @@ read_who_table <- function(
     who_file <- paste0(type, '_', str_sex, '_', postfix,'.txt')
     if(!download) {
       # use tables supplied with package (also from WHO)
-      dat <- data.frame(read.table(file=paste0(system.file(package='PKmisc'),'/', who_file), sep = "\t"))
+      dat <- data.frame(read.table(file=paste0(system.file(package='clinPK'),'/', who_file), sep = "\t"))
       colnames(dat) <- as.character(unlist(dat[1,]))
     } else {
       cat("Downloading data from WHO...")

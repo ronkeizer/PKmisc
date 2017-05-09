@@ -1,7 +1,7 @@
 #' Calculate eGFR
 #'
 #' Calculate the estimated glomerulal filtration rate (an estimate of renal function) based on measured serum creatinine using one of the following approaches:
-#' - Cockroft Gault (using weight, ideal body weight, or adjusted body weight)
+#' - Cockcroft-Gault (using weight, ideal body weight, or adjusted body weight)
 #' - Revised Lund-Malmo
 #' - Modification of Diet in Renal Disease study (MDRD)
 #' - Schwartz
@@ -12,7 +12,7 @@
 #'
 #' Equations for estimation of eGFR from Cystatin C concentrations are available from the `calc_egfr_cystatin()` function.
 #'
-#' @param method eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `ckd_epi`, malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`
+#' @param method eGFR estimation method, choose from `cockcroft_gault`, `cockcroft_gault_ideal`, `mdrd`, `ckd_epi`, malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`
 #' @param sex sex
 #' @param age age
 #' @param scr serum creatinine (mg/dL)
@@ -31,7 +31,7 @@
 #' @param ... arguments passed on
 #' @export
 calc_egfr <- function (
-  method = "cockroft_gault",
+  method = "cockcroft_gault",
   sex = NULL,
   age = NULL,
   scr = NULL,
@@ -49,12 +49,13 @@ calc_egfr <- function (
   unit_out = "mL/min",
   ...
   ) {
+    method <- gsub("-", "_", tolower(method))
+    method <- gsub("cockroft", "cockcroft", tolower(method)) # legacy support for typo
     available_methods <- c(
-      "cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted",
+      "cockcroft_gault", "cockcroft_gault_ideal", "cockcroft_gault_adjusted",
       "malmo_lund_revised", "malmo_lund_rev", "lund_malmo_revised", "lund_malmo_rev",
       "mdrd", "ckd_epi", "schwartz", "schwartz_revised", "jelliffe", "jelliffe_unstable",
       "wright")
-    method <- gsub("-", "_", tolower(method))
     if(!method %in% available_methods) {
       stop(paste0("Sorry, eGFR calculation method not recognized! Please choose from: ", paste0(available_methods, collapse=" ")))
     }
@@ -64,15 +65,15 @@ calc_egfr <- function (
         stop("Sorry, specified serum Cr unit not recognized!")
       }
     }
-    if(method == "cockroft_gault_ideal") {
+    if(method == "cockcroft_gault_ideal") {
       if(is.nil(height) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
-        stop("Cockroft-Gault using ideal body weight requires: scr, sex, weight, height, and age as input!")
+        stop("Cockcroft-Gault using ideal body weight requires: scr, sex, weight, height, and age as input!")
       }
       weight <- calc_ibw(height = height, age = age, sex = sex) # recalculate wt to ibw
     }
-    if(method == "cockroft_gault_adjusted") {
+    if(method == "cockcroft_gault_adjusted") {
       if(is.nil(height) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
-        stop("Cockroft-Gault using adjusted body weight requires: scr, sex, weight, height, and age as input!")
+        stop("Cockcroft-Gault using adjusted body weight requires: scr, sex, weight, height, and age as input!")
       }
       ibw <- calc_ibw(weight = weight, height = height, age = age, sex = sex)
       weight <- calc_abw(weight = weight, ibw = ibw, ...) # recalculate wt to abw, potentially specify factor
@@ -96,7 +97,7 @@ calc_egfr <- function (
     }
     if(is.nil(relative)) {
       relative <- TRUE # most equations report in /1.73m2
-      if(method == "cockroft_gault") { # except CG
+      if(method == "cockcroft_gault") { # except CG
         relative <- FALSE
       }
     }
@@ -211,9 +212,9 @@ calc_egfr <- function (
             unit <- paste0(unit_out, "/1.73m^2")
           }
         }
-        if(method %in% c("cockroft_gault", "cockroft_gault_ideal", "cockroft_gault_adjusted")) {
+        if(method %in% c("cockcroft_gault", "cockcroft_gault_ideal", "cockcroft_gault_adjusted")) {
           if(is.nil(scr[i]) || is.nil(sex) || is.nil(weight) || is.nil(age)) {
-            stop("Cockroft-Gault equation requires: scr, sex, weight, and age as input!")
+            stop("cockcroft-Gault equation requires: scr, sex, weight, and age as input!")
           }
           if(tolower(scr_unit[i]) %in% c("umol/l", "mumol/l", "micromol/l")) {
             scr[i] <- scr[i] / 88.40

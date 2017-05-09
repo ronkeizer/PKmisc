@@ -24,10 +24,10 @@ calc_kel_single_tdm <- function (
   t_next_dose <- tau - (t %% tau)
   kel <- kel_init
   for(i in 1:n_iter) {
-    cpeak <- PKmisc::pk_1cmt_inf_cmax_ss(
+    cpeak <- clinPK::pk_1cmt_inf_cmax_ss(
       dose = dose, CL = kel * V, V = V, tau = tau, t_inf = t_inf
     )
-    cpred <- PKmisc::pk_1cmt_inf_ss(
+    cpred <- clinPK::pk_1cmt_inf_ss(
       t = t,
       dose = dose, CL = kel * V, V = V, tau = tau, t_inf = t_inf)
     kel <- (cpred$dv/dv) * kel

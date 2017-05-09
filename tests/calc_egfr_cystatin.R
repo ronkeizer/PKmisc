@@ -1,5 +1,5 @@
 library(testit)
-library(PKmisc)
+library(clinPK)
 
 assert(round(calc_egfr_cystatin(1.3, unit_out = "ml/min")$value,1) == 54.1)
 assert(round(calc_egfr_cystatin(1.3, unit_out = "l/hr")$value,2) == 3.24)

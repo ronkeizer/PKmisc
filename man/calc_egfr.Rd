@@ -4,14 +4,14 @@
 \alias{calc_egfr}
 \title{Calculate eGFR}
 \usage{
-calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
-  scr_unit = NULL, scr_assay = NULL, race = "other", weight = NULL,
-  height = NULL, bsa = NULL, preterm = FALSE, ckd = FALSE,
-  times = NULL, bsa_method = "dubois", relative = NULL,
+calc_egfr(method = "cockcroft_gault", sex = NULL, age = NULL,
+  scr = NULL, scr_unit = NULL, scr_assay = NULL, race = "other",
+  weight = NULL, height = NULL, bsa = NULL, preterm = FALSE,
+  ckd = FALSE, times = NULL, bsa_method = "dubois", relative = NULL,
   unit_out = "mL/min", ...)
 }
 \arguments{
-\item{method}{eGFR estimation method, choose from `cockroft_gault`, `cockroft_gault_ideal`, `mdrd`, `ckd_epi`, malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`}
+\item{method}{eGFR estimation method, choose from `cockcroft_gault`, `cockcroft_gault_ideal`, `mdrd`, `ckd_epi`, malmo_lund_revised`, `schwartz`, `jelliffe`, `jellife_unstable`, `wright`}
 
 \item{sex}{sex}
 
@@ -47,7 +47,7 @@ calc_egfr(method = "cockroft_gault", sex = NULL, age = NULL, scr = NULL,
 }
 \description{
 Calculate the estimated glomerulal filtration rate (an estimate of renal function) based on measured serum creatinine using one of the following approaches:
-- Cockroft Gault (using weight, ideal body weight, or adjusted body weight)
+- Cockcroft-Gault (using weight, ideal body weight, or adjusted body weight)
 - Revised Lund-Malmo
 - Modification of Diet in Renal Disease study (MDRD)
 - Schwartz
